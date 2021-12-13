@@ -3,6 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+Game Boy Advance/GBA CleanLight/Hardware/GBA CleanLight/Output/
+
 # User-specific files
 *.rsuser
 *.suo
