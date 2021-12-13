@@ -1,0 +1,6 @@
+Designator,Comment,Footprint,Quantity,Manufacturer,Manufacturer Part Number
+,,,,,
+C1,0.1uF,C0402,1,Yageo,CC0402KRX7R7BB104
+C2,1uF,C0402,1,Murata Electronics North America,GRM155R61A105KE15D
+"R1, R2",10k,R0201,2,Yageo,RC0201JR-0710KL
+U1,PIC16F676-I/ML,QFN-16 4X4,1,Microchip,PIC16F676-I/ML
