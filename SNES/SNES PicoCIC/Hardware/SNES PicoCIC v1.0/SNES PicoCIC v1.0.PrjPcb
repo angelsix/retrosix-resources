@@ -31,7 +31,7 @@ ReportSuppressedErrorsInMessages=0
 FSMCodingStyle=eFMSDropDownList_OneProcess
 FSMEncodingStyle=eFMSDropDownList_OneHot
 IsProjectConflictPreventionWarningsEnabled=0
-OutputPath=
+OutputPath=Project Outputs for SNES PicoCIC v1.0
 LogFolderPath=
 ManagedProjectGUID=
 IncludeDesignInRelease=0
@@ -47,7 +47,7 @@ PrefsVaultGUID=
 PrefsRevisionGUID=
 
 [Document1]
-DocumentPath=SNES SuperCIC v1.0.SchDoc
+DocumentPath=SNES PicoCIC v1.0.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -64,7 +64,7 @@ GenerateClassCluster=0
 DocumentUniqueId=EMPTXQIM
 
 [Document2]
-DocumentPath=SNES SuperCIC v1.0.PcbDoc
+DocumentPath=SNES PicoCIC v1.0.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -80,6 +80,119 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=VAJUHNQF
 
+[Document3]
+DocumentPath=SNES PicoCIC v1.0.OutJob
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=
+
+[GeneratedDocument1]
+DocumentPath=Release Files\BOM\Bill of Materials-SNES PicoCIC v1.0.csv
+DItemRevisionGUID=
+
+[GeneratedDocument2]
+DocumentPath=Project Outputs for SNES PicoCIC v1.0\Design Rule Check - SNES PicoCIC v1.html
+DItemRevisionGUID=
+
+[GeneratedDocument3]
+DocumentPath=Release Files\NC Drill\SNES PicoCIC v1.0.DRR
+DItemRevisionGUID=
+
+[GeneratedDocument4]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.EXTREP
+DItemRevisionGUID=
+
+[GeneratedDocument5]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GBL
+DItemRevisionGUID=
+
+[GeneratedDocument6]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GBO
+DItemRevisionGUID=
+
+[GeneratedDocument7]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GBP
+DItemRevisionGUID=
+
+[GeneratedDocument8]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GBS
+DItemRevisionGUID=
+
+[GeneratedDocument9]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GD1
+DItemRevisionGUID=
+
+[GeneratedDocument10]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GG1
+DItemRevisionGUID=
+
+[GeneratedDocument11]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GKO
+DItemRevisionGUID=
+
+[GeneratedDocument12]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GM1
+DItemRevisionGUID=
+
+[GeneratedDocument13]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GM2
+DItemRevisionGUID=
+
+[GeneratedDocument14]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GM13
+DItemRevisionGUID=
+
+[GeneratedDocument15]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GM14
+DItemRevisionGUID=
+
+[GeneratedDocument16]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GPB
+DItemRevisionGUID=
+
+[GeneratedDocument17]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GPT
+DItemRevisionGUID=
+
+[GeneratedDocument18]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GTL
+DItemRevisionGUID=
+
+[GeneratedDocument19]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GTP
+DItemRevisionGUID=
+
+[GeneratedDocument20]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GTS
+DItemRevisionGUID=
+
+[GeneratedDocument21]
+DocumentPath=Release Files\NC Drill\SNES PicoCIC v1.0.LDP
+DItemRevisionGUID=
+
+[GeneratedDocument22]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.REP
+DItemRevisionGUID=
+
+[GeneratedDocument23]
+DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.RUL
+DItemRevisionGUID=
+
+[GeneratedDocument24]
+DocumentPath=Release Files\NC Drill\SNES PicoCIC v1.0.TXT
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0
@@ -89,6 +202,9 @@ Variant=[No Variations]
 OutputJobsCount=0
 ContentTypeGUID=CB6F2064-E317-11DF-B822-12313F0024A2
 ConfigurationType=Source
+
+[Generic_EDE]
+OutputDir=Project Outputs for SNES PicoCIC v1.0
 
 [OutputGroup1]
 Name=Netlist Outputs
@@ -1004,6 +1120,48 @@ SelectedOnly=0
 UpdateVariants=1
 UpdateToLatestRevision=1
 PartTypes=0
+ComponentLibIdentifierKind0=Library Name And Type
+ComponentLibraryIdentifier0=Integrated_Library.IntLib
+ComponentDesignItemID0=0.8MM Castellated Pad
+ComponentSymbolReference0=0.8MM Castellated Pad
+ComponentUpdate0=1
+ComponentIsDeviceSheet0=0
+ComponentLibIdentifierKind1=Library Name And Type
+ComponentLibraryIdentifier1=Integrated_Library.IntLib
+ComponentDesignItemID1=CAP_0UF1_0402
+ComponentSymbolReference1=CAP_0UF1_0402
+ComponentUpdate1=0
+ComponentIsDeviceSheet1=0
+ComponentLibIdentifierKind2=Library Name And Type
+ComponentLibraryIdentifier2=Integrated_Library.IntLib
+ComponentDesignItemID2=CAP_1UF_0402
+ComponentSymbolReference2=CAP_1UF_0402
+ComponentUpdate2=0
+ComponentIsDeviceSheet2=0
+ComponentLibIdentifierKind3=Library Name And Type
+ComponentLibraryIdentifier3=Integrated_Library.IntLib
+ComponentDesignItemID3=JTAG-SWD2
+ComponentSymbolReference3=JTAG-SWD2
+ComponentUpdate3=0
+ComponentIsDeviceSheet3=0
+ComponentLibIdentifierKind4=Library Name And Type
+ComponentLibraryIdentifier4=Integrated_Library.IntLib
+ComponentDesignItemID4=PIC16F676-I/ML
+ComponentSymbolReference4=PIC16F676-I/ML
+ComponentUpdate4=0
+ComponentIsDeviceSheet4=0
+ComponentLibIdentifierKind5=Library Name And Type
+ComponentLibraryIdentifier5=Integrated_Library.IntLib
+ComponentDesignItemID5=RES_10K_0201
+ComponentSymbolReference5=RES_10K_0201
+ComponentUpdate5=0
+ComponentIsDeviceSheet5=0
+ComponentLibIdentifierKind6=Library Name And Type
+ComponentLibraryIdentifier6=Integrated_Library.IntLib
+ComponentDesignItemID6=SP
+ComponentSymbolReference6=SP
+ComponentUpdate6=0
+ComponentIsDeviceSheet6=0
 FullReplace=1
 UpdateDesignatorLock=1
 UpdatePartIDLock=1
@@ -1017,6 +1175,118 @@ RemoveParameters=0
 AddModels=1
 RemoveModels=1
 UpdateCurrentModels=1
+ParameterName0=Applications
+ParameterUpdate0=1
+ParameterName1=Capacitance
+ParameterUpdate1=1
+ParameterName2=Category
+ParameterUpdate2=1
+ParameterName3=Comment
+ParameterUpdate3=1
+ParameterName4=Component Kind
+ParameterUpdate4=1
+ParameterName5=ComponentLink1Description
+ParameterUpdate5=1
+ParameterName6=ComponentLink1URL
+ParameterUpdate6=1
+ParameterName7=ComponentLink2Description
+ParameterUpdate7=1
+ParameterName8=ComponentLink2URL
+ParameterUpdate8=1
+ParameterName9=ComponentLink3Description
+ParameterUpdate9=1
+ParameterName10=ComponentLink3URL
+ParameterUpdate10=1
+ParameterName11=Composition
+ParameterUpdate11=1
+ParameterName12=Description
+ParameterUpdate12=1
+ParameterName13=Features
+ParameterUpdate13=1
+ParameterName14=Height
+ParameterUpdate14=1
+ParameterName15=Height - Seated (Max)
+ParameterUpdate15=1
+ParameterName16=Lead Spacing
+ParameterUpdate16=1
+ParameterName17=Lead Style
+ParameterUpdate17=1
+ParameterName18=Library Reference
+ParameterUpdate18=1
+ParameterName19=Manufacturer
+ParameterUpdate19=1
+ParameterName20=Manufacturer Part Number
+ParameterUpdate20=1
+ParameterName21=Mounting Type
+ParameterUpdate21=1
+ParameterName22=Number of Terminations
+ParameterUpdate22=1
+ParameterName23=Operating Temperature
+ParameterUpdate23=1
+ParameterName24=Package / Case
+ParameterUpdate24=1
+ParameterName25=Packaging
+ParameterUpdate25=1
+ParameterName26=Power (Watts)
+ParameterUpdate26=1
+ParameterName27=Pricing 1
+ParameterUpdate27=1
+ParameterName28=Ratings
+ParameterUpdate28=1
+ParameterName29=Resistance (Ohms)
+ParameterUpdate29=1
+ParameterName30=RoHS
+ParameterUpdate30=1
+ParameterName31=Size / Dimension
+ParameterUpdate31=1
+ParameterName32=Stock 1
+ParameterUpdate32=1
+ParameterName33=Supplier 1
+ParameterUpdate33=1
+ParameterName34=Supplier Device Package
+ParameterUpdate34=1
+ParameterName35=Supplier Part Number 1
+ParameterUpdate35=1
+ParameterName36=Temperature Coefficient
+ParameterUpdate36=1
+ParameterName37=Thickness (Max)
+ParameterUpdate37=1
+ParameterName38=Tolerance
+ParameterUpdate38=1
+ParameterName39=Voltage - Rated
+ParameterUpdate39=1
+ModelTypeGroup0=PCBLIB
+ModelTypeUpdate0=1
+ModelType0=PCBLIB
+ModelName0=0.8MM CASTELLATED PAD
+ModelUpdate0=1
+ModelType1=PCBLIB
+ModelName1=C0402
+ModelUpdate1=1
+ModelType2=PCBLIB
+ModelName2=JTAG-SWD 1.28mm
+ModelUpdate2=1
+ModelType3=PCBLIB
+ModelName3=QFN-16
+ModelUpdate3=1
+ModelType4=PCBLIB
+ModelName4=QFN-16 4X4
+ModelUpdate4=1
+ModelType5=PCBLIB
+ModelName5=R0201
+ModelUpdate5=1
+ModelType6=PCBLIB
+ModelName6=SP1
+ModelUpdate6=1
+ModelType7=PCBLIB
+ModelName7=SP1.5
+ModelUpdate7=1
+ModelType8=PCBLIB
+ModelName8=SP2
+ModelUpdate8=1
+ModelType9=PCBLIB
+ModelName9=SP2-5
+ModelUpdate9=1
 
 [DatabaseUpdateOptions]
 SelectedOnly=0
