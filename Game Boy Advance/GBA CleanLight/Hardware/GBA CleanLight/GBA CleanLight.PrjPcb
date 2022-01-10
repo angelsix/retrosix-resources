@@ -31,7 +31,7 @@ ReportSuppressedErrorsInMessages=0
 FSMCodingStyle=eFMSDropDownList_OneProcess
 FSMEncodingStyle=eFMSDropDownList_OneHot
 IsProjectConflictPreventionWarningsEnabled=0
-OutputPath=Project Outputs for GBA CleanLight
+OutputPath=
 LogFolderPath=
 ManagedProjectGUID=
 IncludeDesignInRelease=0
@@ -97,110 +97,6 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[GeneratedDocument1]
-DocumentPath=Output\BOM\Bill of Materials-GBA CleanLight.csv
-DItemRevisionGUID=
-
-[GeneratedDocument2]
-DocumentPath=Output\NC Drill\GBA CleanLight.DRR
-DItemRevisionGUID=
-
-[GeneratedDocument3]
-DocumentPath=Output\Gerber\GBA CleanLight.EXTREP
-DItemRevisionGUID=
-
-[GeneratedDocument4]
-DocumentPath=Output\Gerber\GBA CleanLight.GBL
-DItemRevisionGUID=
-
-[GeneratedDocument5]
-DocumentPath=Output\Gerber\GBA CleanLight.GBO
-DItemRevisionGUID=
-
-[GeneratedDocument6]
-DocumentPath=Output\Gerber\GBA CleanLight.GBP
-DItemRevisionGUID=
-
-[GeneratedDocument7]
-DocumentPath=Output\Gerber\GBA CleanLight.GBS
-DItemRevisionGUID=
-
-[GeneratedDocument8]
-DocumentPath=Output\Gerber\GBA CleanLight.GD1
-DItemRevisionGUID=
-
-[GeneratedDocument9]
-DocumentPath=Output\Gerber\GBA CleanLight.GG1
-DItemRevisionGUID=
-
-[GeneratedDocument10]
-DocumentPath=Output\Gerber\GBA CleanLight.GKO
-DItemRevisionGUID=
-
-[GeneratedDocument11]
-DocumentPath=Output\Gerber\GBA CleanLight.GM1
-DItemRevisionGUID=
-
-[GeneratedDocument12]
-DocumentPath=Output\Gerber\GBA CleanLight.GM2
-DItemRevisionGUID=
-
-[GeneratedDocument13]
-DocumentPath=Output\Gerber\GBA CleanLight.GM3
-DItemRevisionGUID=
-
-[GeneratedDocument14]
-DocumentPath=Output\Gerber\GBA CleanLight.GM4
-DItemRevisionGUID=
-
-[GeneratedDocument15]
-DocumentPath=Output\Gerber\GBA CleanLight.GM13
-DItemRevisionGUID=
-
-[GeneratedDocument16]
-DocumentPath=Output\Gerber\GBA CleanLight.GM14
-DItemRevisionGUID=
-
-[GeneratedDocument17]
-DocumentPath=Output\Gerber\GBA CleanLight.GPB
-DItemRevisionGUID=
-
-[GeneratedDocument18]
-DocumentPath=Output\Gerber\GBA CleanLight.GPT
-DItemRevisionGUID=
-
-[GeneratedDocument19]
-DocumentPath=Output\Gerber\GBA CleanLight.GTL
-DItemRevisionGUID=
-
-[GeneratedDocument20]
-DocumentPath=Output\Gerber\GBA CleanLight.GTO
-DItemRevisionGUID=
-
-[GeneratedDocument21]
-DocumentPath=Output\Gerber\GBA CleanLight.GTP
-DItemRevisionGUID=
-
-[GeneratedDocument22]
-DocumentPath=Output\Gerber\GBA CleanLight.GTS
-DItemRevisionGUID=
-
-[GeneratedDocument23]
-DocumentPath=Output\NC Drill\GBA CleanLight.LDP
-DItemRevisionGUID=
-
-[GeneratedDocument24]
-DocumentPath=Output\Gerber\GBA CleanLight.REP
-DItemRevisionGUID=
-
-[GeneratedDocument25]
-DocumentPath=Output\Gerber\GBA CleanLight.RUL
-DItemRevisionGUID=
-
-[GeneratedDocument26]
-DocumentPath=Output\NC Drill\GBA CleanLight.TXT
-DItemRevisionGUID=
-
 [Configuration1]
 Name=Sources
 ParameterCount=0
@@ -212,7 +108,7 @@ ContentTypeGUID=CB6F2064-E317-11DF-B822-12313F0024A2
 ConfigurationType=Source
 
 [Generic_EDE]
-OutputDir=Project Outputs for GBA CleanLight
+OutputDir=
 
 [OutputGroup1]
 Name=Netlist Outputs
