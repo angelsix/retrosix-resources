@@ -25,13 +25,14 @@ NameNetsHierarchically=0
 PowerPortNamesTakePriority=0
 AutoSheetNumbering=1
 AutoCrossReferences=0
+NewIndexingOfSheetSymbols=0
 PushECOToAnnotationFile=1
 DItemRevisionGUID=
 ReportSuppressedErrorsInMessages=0
 FSMCodingStyle=eFMSDropDownList_OneProcess
 FSMEncodingStyle=eFMSDropDownList_OneHot
 IsProjectConflictPreventionWarningsEnabled=0
-OutputPath=Project Outputs for SNES PicoCIC v1.0
+OutputPath=
 LogFolderPath=
 ManagedProjectGUID=
 IncludeDesignInRelease=0
@@ -97,102 +98,6 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[GeneratedDocument1]
-DocumentPath=Release Files\BOM\Bill of Materials-SNES PicoCIC v1.0.csv
-DItemRevisionGUID=
-
-[GeneratedDocument2]
-DocumentPath=Project Outputs for SNES PicoCIC v1.0\Design Rule Check - SNES PicoCIC v1.html
-DItemRevisionGUID=
-
-[GeneratedDocument3]
-DocumentPath=Release Files\NC Drill\SNES PicoCIC v1.0.DRR
-DItemRevisionGUID=
-
-[GeneratedDocument4]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.EXTREP
-DItemRevisionGUID=
-
-[GeneratedDocument5]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GBL
-DItemRevisionGUID=
-
-[GeneratedDocument6]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GBO
-DItemRevisionGUID=
-
-[GeneratedDocument7]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GBP
-DItemRevisionGUID=
-
-[GeneratedDocument8]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GBS
-DItemRevisionGUID=
-
-[GeneratedDocument9]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GD1
-DItemRevisionGUID=
-
-[GeneratedDocument10]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GG1
-DItemRevisionGUID=
-
-[GeneratedDocument11]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GKO
-DItemRevisionGUID=
-
-[GeneratedDocument12]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GM1
-DItemRevisionGUID=
-
-[GeneratedDocument13]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GM2
-DItemRevisionGUID=
-
-[GeneratedDocument14]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GM13
-DItemRevisionGUID=
-
-[GeneratedDocument15]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GM14
-DItemRevisionGUID=
-
-[GeneratedDocument16]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GPB
-DItemRevisionGUID=
-
-[GeneratedDocument17]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GPT
-DItemRevisionGUID=
-
-[GeneratedDocument18]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GTL
-DItemRevisionGUID=
-
-[GeneratedDocument19]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GTP
-DItemRevisionGUID=
-
-[GeneratedDocument20]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.GTS
-DItemRevisionGUID=
-
-[GeneratedDocument21]
-DocumentPath=Release Files\NC Drill\SNES PicoCIC v1.0.LDP
-DItemRevisionGUID=
-
-[GeneratedDocument22]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.REP
-DItemRevisionGUID=
-
-[GeneratedDocument23]
-DocumentPath=Release Files\Gerber\SNES PicoCIC v1.0.RUL
-DItemRevisionGUID=
-
-[GeneratedDocument24]
-DocumentPath=Release Files\NC Drill\SNES PicoCIC v1.0.TXT
-DItemRevisionGUID=
-
 [Configuration1]
 Name=Sources
 ParameterCount=0
@@ -204,12 +109,12 @@ ContentTypeGUID=CB6F2064-E317-11DF-B822-12313F0024A2
 ConfigurationType=Source
 
 [Generic_EDE]
-OutputDir=Project Outputs for SNES PicoCIC v1.0
+OutputDir=
 
 [OutputGroup1]
 Name=Netlist Outputs
 Description=
-TargetPrinter=Adobe PDF
+TargetPrinter=Print to PDF (Mac Desktop)
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputType1=CadnetixNetlist
 OutputName1=Cadnetix Netlist
@@ -315,7 +220,7 @@ OutputDefault20=0
 [OutputGroup2]
 Name=Simulator Outputs
 Description=
-TargetPrinter=Adobe PDF
+TargetPrinter=Print to PDF (Mac Desktop)
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 
 [OutputGroup3]
@@ -393,7 +298,7 @@ PageOptions11=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|Print
 [OutputGroup4]
 Name=Assembly Outputs
 Description=
-TargetPrinter=Adobe PDF
+TargetPrinter=Print to PDF (Mac Desktop)
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputType1=Assembly
 OutputName1=Assembly Drawings
@@ -415,7 +320,7 @@ OutputDefault3=0
 [OutputGroup5]
 Name=Fabrication Outputs
 Description=
-TargetPrinter=Adobe PDF
+TargetPrinter=Print to PDF (Mac Desktop)
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputType1=Board Stack Report
 OutputName1=Report Board Stack
@@ -487,7 +392,7 @@ OutputDefault12=0
 [OutputGroup6]
 Name=Report Outputs
 Description=
-TargetPrinter=Adobe PDF
+TargetPrinter=Print to PDF (Mac Desktop)
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputType1=BOM_PartType
 OutputName1=Bill of Materials
@@ -536,7 +441,7 @@ OutputDefault8=0
 [OutputGroup7]
 Name=Other Outputs
 Description=
-TargetPrinter=Adobe PDF
+TargetPrinter=Print to PDF (Mac Desktop)
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputType1=Text Print
 OutputName1=Text Print
@@ -644,7 +549,7 @@ PageOptions17=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|Print
 [OutputGroup8]
 Name=Validation Outputs
 Description=
-TargetPrinter=Adobe PDF
+TargetPrinter=Print to PDF (Mac Desktop)
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputType1=BOM_Violations
 OutputName1=BOM Checks Report
@@ -688,7 +593,7 @@ OutputDefault7=0
 [OutputGroup9]
 Name=Export Outputs
 Description=
-TargetPrinter=Adobe PDF
+TargetPrinter=Print to PDF (Mac Desktop)
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputType1=AutoCAD dwg/dxf PCB
 OutputName1=AutoCAD dwg/dxf File PCB
@@ -749,7 +654,7 @@ OutputDefault11=0
 [OutputGroup10]
 Name=PostProcess Outputs
 Description=
-TargetPrinter=Adobe PDF
+TargetPrinter=Print to PDF (Mac Desktop)
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputType1=Copy Files
 OutputName1=Copy Files
@@ -1074,6 +979,7 @@ Type122=2
 Type123=1
 Type124=1
 Type125=1
+Type126=1
 
 [ERC Connection Matrix]
 L1=NNNNNNNNNNNWNNNWW

@@ -5,6 +5,8 @@
 
 Game Boy Advance/GBA CleanLight/Hardware/GBA CleanLight/Output/
 
+.DS_Store
+
 # User-specific files
 *.rsuser
 *.suo
