@@ -7,6 +7,7 @@
         {
             "type": "emulicious-debugger",
             "request": "launch",
+            "emuliciousPath": "${workspaceFolder}/../../Resources/Emulicious",
             "name": "Launch in Emulicious",
             "program": "${workspaceFolder}/build/game.gb",
             "port": 58870,
