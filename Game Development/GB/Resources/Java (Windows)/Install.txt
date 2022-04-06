@@ -1,0 +1,2 @@
+To use Emulicious on Windows install Java
+https://java.com/en/download/
