@@ -1,0 +1,196 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler 
+                                      3 ; Version 4.2.2 #13350 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module main
+                                      6 	.optsdcc -msm83
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _main
+                                     12 	.globl _puts
+                                     13 	.globl _printf
+                                     14 	.globl _joypad
+                                     15 ;--------------------------------------------------------
+                                     16 ; special function registers
+                                     17 ;--------------------------------------------------------
+                                     18 ;--------------------------------------------------------
+                                     19 ; ram data
+                                     20 ;--------------------------------------------------------
+                                     21 	.area _DATA
+                                     22 ;--------------------------------------------------------
+                                     23 ; ram data
+                                     24 ;--------------------------------------------------------
+                                     25 	.area _INITIALIZED
+                                     26 ;--------------------------------------------------------
+                                     27 ; absolute external ram data
+                                     28 ;--------------------------------------------------------
+                                     29 	.area _DABS (ABS)
+                                     30 ;--------------------------------------------------------
+                                     31 ; global & static initialisations
+                                     32 ;--------------------------------------------------------
+                                     33 	.area _HOME
+                                     34 	.area _GSINIT
+                                     35 	.area _GSFINAL
+                                     36 	.area _GSINIT
+                                     37 ;--------------------------------------------------------
+                                     38 ; Home
+                                     39 ;--------------------------------------------------------
+                                     40 	.area _HOME
+                                     41 	.area _HOME
+                                     42 ;--------------------------------------------------------
+                                     43 ; code
+                                     44 ;--------------------------------------------------------
+                                     45 	.area _CODE
+                                     46 ;..\with-space\main.c:4: void main()
+                                     47 ;	---------------------------------
+                                     48 ; Function main
+                                     49 ; ---------------------------------
+      000000                         50 _main::
+                                     51 ;..\with-space\main.c:8: printf("Press any button...");
+      000000 11r8Fr00         [12]   52 	ld	de, #___str_0
+      000003 D5               [16]   53 	push	de
+      000004 CDr00r00         [24]   54 	call	_printf
+      000007 E1               [12]   55 	pop	hl
+                                     56 ;..\with-space\main.c:10: while (1)
+      000008                         57 00121$:
+                                     58 ;..\with-space\main.c:12: mButtons = joypad();
+      000008 CDr00r00         [24]   59 	call	_joypad
+      00000B 4F               [ 4]   60 	ld	c, a
+                                     61 ;..\with-space\main.c:14: if (mButtons & J_A)
+      00000C CB 61            [ 8]   62 	bit	4, c
+      00000E 28 0A            [12]   63 	jr	Z, 00102$
+                                     64 ;..\with-space\main.c:15: printf("A ");
+      000010 C5               [16]   65 	push	bc
+      000011 11rA3r00         [12]   66 	ld	de, #___str_1
+      000014 D5               [16]   67 	push	de
+      000015 CDr00r00         [24]   68 	call	_printf
+      000018 E1               [12]   69 	pop	hl
+      000019 C1               [12]   70 	pop	bc
+      00001A                         71 00102$:
+                                     72 ;..\with-space\main.c:16: if (mButtons & J_B)
+      00001A CB 69            [ 8]   73 	bit	5, c
+      00001C 28 0A            [12]   74 	jr	Z, 00104$
+                                     75 ;..\with-space\main.c:17: printf("B ");
+      00001E C5               [16]   76 	push	bc
+      00001F 11rA6r00         [12]   77 	ld	de, #___str_2
+      000022 D5               [16]   78 	push	de
+      000023 CDr00r00         [24]   79 	call	_printf
+      000026 E1               [12]   80 	pop	hl
+      000027 C1               [12]   81 	pop	bc
+      000028                         82 00104$:
+                                     83 ;..\with-space\main.c:18: if (mButtons & J_UP)
+      000028 CB 51            [ 8]   84 	bit	2, c
+      00002A 28 0A            [12]   85 	jr	Z, 00106$
+                                     86 ;..\with-space\main.c:19: printf("U ");
+      00002C C5               [16]   87 	push	bc
+      00002D 11rA9r00         [12]   88 	ld	de, #___str_3
+      000030 D5               [16]   89 	push	de
+      000031 CDr00r00         [24]   90 	call	_printf
+      000034 E1               [12]   91 	pop	hl
+      000035 C1               [12]   92 	pop	bc
+      000036                         93 00106$:
+                                     94 ;..\with-space\main.c:20: if (mButtons & J_DOWN)
+      000036 CB 59            [ 8]   95 	bit	3, c
+      000038 28 0A            [12]   96 	jr	Z, 00108$
+                                     97 ;..\with-space\main.c:21: printf("D ");
+      00003A C5               [16]   98 	push	bc
+      00003B 11rACr00         [12]   99 	ld	de, #___str_4
+      00003E D5               [16]  100 	push	de
+      00003F CDr00r00         [24]  101 	call	_printf
+      000042 E1               [12]  102 	pop	hl
+      000043 C1               [12]  103 	pop	bc
+      000044                        104 00108$:
+                                    105 ;..\with-space\main.c:22: if (mButtons & J_LEFT)
+      000044 CB 49            [ 8]  106 	bit	1, c
+      000046 28 0A            [12]  107 	jr	Z, 00110$
+                                    108 ;..\with-space\main.c:23: printf("L ");
+      000048 C5               [16]  109 	push	bc
+      000049 11rAFr00         [12]  110 	ld	de, #___str_5
+      00004C D5               [16]  111 	push	de
+      00004D CDr00r00         [24]  112 	call	_printf
+      000050 E1               [12]  113 	pop	hl
+      000051 C1               [12]  114 	pop	bc
+      000052                        115 00110$:
+                                    116 ;..\with-space\main.c:24: if (mButtons & J_RIGHT)
+      000052 CB 41            [ 8]  117 	bit	0, c
+      000054 28 0A            [12]  118 	jr	Z, 00112$
+                                    119 ;..\with-space\main.c:25: printf("R ");
+      000056 C5               [16]  120 	push	bc
+      000057 11rB2r00         [12]  121 	ld	de, #___str_6
+      00005A D5               [16]  122 	push	de
+      00005B CDr00r00         [24]  123 	call	_printf
+      00005E E1               [12]  124 	pop	hl
+      00005F C1               [12]  125 	pop	bc
+      000060                        126 00112$:
+                                    127 ;..\with-space\main.c:26: if (mButtons & J_START)
+      000060 CB 79            [ 8]  128 	bit	7, c
+      000062 28 0A            [12]  129 	jr	Z, 00114$
+                                    130 ;..\with-space\main.c:27: printf("+ ");
+      000064 C5               [16]  131 	push	bc
+      000065 11rB5r00         [12]  132 	ld	de, #___str_7
+      000068 D5               [16]  133 	push	de
+      000069 CDr00r00         [24]  134 	call	_printf
+      00006C E1               [12]  135 	pop	hl
+      00006D C1               [12]  136 	pop	bc
+      00006E                        137 00114$:
+                                    138 ;..\with-space\main.c:28: if (mButtons & J_SELECT)
+      00006E CB 71            [ 8]  139 	bit	6, c
+      000070 28 0A            [12]  140 	jr	Z, 00116$
+                                    141 ;..\with-space\main.c:29: printf("- ");
+      000072 C5               [16]  142 	push	bc
+      000073 11rB8r00         [12]  143 	ld	de, #___str_8
+      000076 D5               [16]  144 	push	de
+      000077 CDr00r00         [24]  145 	call	_printf
+      00007A E1               [12]  146 	pop	hl
+      00007B C1               [12]  147 	pop	bc
+      00007C                        148 00116$:
+                                    149 ;..\with-space\main.c:31: printf("\n");
+      00007C C5               [16]  150 	push	bc
+      00007D 11rBBr00         [12]  151 	ld	de, #___str_10
+      000080 CDr00r00         [24]  152 	call	_puts
+      000083 C1               [12]  153 	pop	bc
+                                    154 ;..\with-space\main.c:33: while (mButtons == joypad());
+      000084                        155 00117$:
+      000084 CDr00r00         [24]  156 	call	_joypad
+      000087 47               [ 4]  157 	ld	b, a
+      000088 79               [ 4]  158 	ld	a, c
+      000089 90               [ 4]  159 	sub	a, b
+      00008A 28 F8            [12]  160 	jr	Z, 00117$
+                                    161 ;..\with-space\main.c:35: }
+      00008C C3r08r00         [16]  162 	jp	00121$
+      00008F                        163 ___str_0:
+      00008F 50 72 65 73 73 20 61   164 	.ascii "Press any button..."
+             6E 79 20 62 75 74 74
+             6F 6E 2E 2E 2E
+      0000A2 00                     165 	.db 0x00
+      0000A3                        166 ___str_1:
+      0000A3 41 20                  167 	.ascii "A "
+      0000A5 00                     168 	.db 0x00
+      0000A6                        169 ___str_2:
+      0000A6 42 20                  170 	.ascii "B "
+      0000A8 00                     171 	.db 0x00
+      0000A9                        172 ___str_3:
+      0000A9 55 20                  173 	.ascii "U "
+      0000AB 00                     174 	.db 0x00
+      0000AC                        175 ___str_4:
+      0000AC 44 20                  176 	.ascii "D "
+      0000AE 00                     177 	.db 0x00
+      0000AF                        178 ___str_5:
+      0000AF 4C 20                  179 	.ascii "L "
+      0000B1 00                     180 	.db 0x00
+      0000B2                        181 ___str_6:
+      0000B2 52 20                  182 	.ascii "R "
+      0000B4 00                     183 	.db 0x00
+      0000B5                        184 ___str_7:
+      0000B5 2B 20                  185 	.ascii "+ "
+      0000B7 00                     186 	.db 0x00
+      0000B8                        187 ___str_8:
+      0000B8 2D 20                  188 	.ascii "- "
+      0000BA 00                     189 	.db 0x00
+      0000BB                        190 ___str_10:
+      0000BB 00                     191 	.db 0x00
+                                    192 	.area _CODE
+                                    193 	.area _INITIALIZER
+                                    194 	.area _CABS (ABS)

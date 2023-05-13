@@ -12,14 +12,19 @@ symbols loaded from a symfile
 variables (see below)
 the @ operator to "read" a value from a calculated address
 the @@ operator to specifcy the location to read from (Usage: location@@address)
-the :: operator to map a specified address to a specified bank (Usage: bank::address)
+the : operator to map a specified address to a specified bank (Usage: bank:address)
+the ? operator to retrive the bank at the specified address (Usage: ?address)
 
 Besides that the following variables are supported:
 All register names (As single registers and as register pairs)
+Flag names followed by the letter f (For example zf for the zero flag)
 va (the current vdp address)
 vaddress (the current vdp address)
 scanline (the current scanline)
 address (the current address)
+ie (1 if interrupts enabled else 0)
+ime (same as above)
+sram (0 if sram disabled, 1 if sram enabled, -1 if sram not available)
 bank0 (the bank in slot 0)
 bank1 (the bank in slot 1)
 bank2 (the bank in slot 2)
@@ -28,18 +33,24 @@ For read/write watchpoints only:
 value (the value being read/written)
 port (the port being read/written)
 source (the address being read/written)
-For write watchpoints only:
-oldvalue (the value being overwritten)
+op (the operation: 0 - read, 1 - write, 2 - execute)
+oldvalue (the value before the operation)
+For read watchpoints only:
+destination (the destination of a branch instruction)
 
 Possible locations are:
-rom, ram, vram, sram, word (word is a pseudo-location to read words instead of bytes)
+rom, ram, vram, sram,
+word (word is a pseudo-location to read words instead of bytes),
+dword (same as word but for double words, i.e. 4 bytes),
+beword (same as word but big-endian),
+bedword (same as dword but big-endian)
 Locations can be prefixed with "word." to read a word from a location. Example: "word.ram@@spritePointer" to read the sprite pointer from RAM.
 
 Examples:
-Expression "a::hl" maps the value of register hl to the bank specified by register a
+Expression "a:hl" maps the value of register hl to the bank specified by register a
 Watchpoint on RAM address $c000 with condition "value = $82": The watchpoint only triggers when the value being read/written from/to $c000 equals to $82
 Watchpoint on RAM address $c000 with condition "value != oldvalue": The watchpoint only triggers when the value being written to $c000 differs from its old value
-Breakpoint on ROM address $0100 with condition "!(f & $40)": The breakpoint only triggers when the zero flag is not set.
+Breakpoint on ROM address $0100 with condition "!zf": The breakpoint only triggers when the zero flag is not set.
                                                              Explanation: f is the flags register, $40 has only the 6th bit set (which is the zero flag)
 Watchpoint on RAM address $c000 with condition "value != 0": The watchpoint only triggers when the value being read/written from/to $c000 is not 0
 Watchpoint on RAM address $c000 with condition "oldvalue > 0 && value = 0": The watchpoint only triggers when the value being written to $c000

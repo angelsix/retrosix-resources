@@ -4,9 +4,13 @@
         {
             "label": "Build ROM",
             "type": "shell",
-            "windows": { "command": "mkdir build & ..\\..\\Resources\\gbdk-win\\bin\\lcc -debug -o build\\game.gb main.c" },
-            "osx": { "command": "mkdir build; ../../Resources/gbdk-mac/bin/lcc -debug -o build/game.gb main.c" },
-            "problemMatcher": [ "$msCompile", "$gcc" ],
+            "windows": {
+                "command": "mkdir build & ..\\..\\Resources\\gbdk-win\\bin\\lcc -debug -o build\\game.gb main.c"
+            },
+            "osx": {
+                "command": "mkdir build; ../../Resources/gbdk-mac/bin/lcc -debug -o build/game.gb main.c"
+            },
+            "problemMatcher": ["$msCompile", "$gcc"],
             "group": {
                 "kind": "build",
                 "isDefault": true

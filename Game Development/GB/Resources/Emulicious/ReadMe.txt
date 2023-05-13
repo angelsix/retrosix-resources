@@ -16,6 +16,13 @@ Required Runtimes
 Java 6 or newer:
 http://www.java.com
 
+===============
+Troubleshooting
+===============
+There have been reports of bad performance on Windows 11. This seems to be a driver issue. You can either update your drivers or disable Hardware Acceleration.
+On Windows with high-dpi screens, Windows applies some scaling which causes fonts to appear blurry. You can fix this by letting the application handle the scaling.
+You can find this via right-click on Emulicious.exe -> Properties -> Compatibility -> Change High DPI Settings -> Tick the checkbox at the bottom and select Application.
+
 ====================
 Commandline Commands
 ====================

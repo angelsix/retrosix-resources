@@ -1,4 +1,222 @@
 ==========
+2023-04-22
+==========
+- Added Step Back to the debugger
+- Fixed misdetection of dahjee adapter in Pop Flamer for SG-1000 (thanks to Saverio Russo)
+
+==========
+2023-04-06
+==========
+- Added variable for Game Boy's Wave Pattern RAM (thanks to ISSOtm)
+- Added variable for Game Boy's internal window line counter
+- Fixed an issue where the state of the Game Boy's timer didn't get saved properly into savestates (thanks to 256 and ProstatePunch)
+- Fixed that a watchpoint on WRAM address $c000 could break on a write to $ff80 (thanks to ISSOtm)
+- Fixed an issue with banked vs. unbanked symbols in debugfiles (thanks to ax6)
+
+==========
+2023-03-31
+==========
+- Added an exception that triggers for an incorrect Game Boy cartridge header (thanks to leina)
+- Added missing register annotations in Memory Editor for Game Boy's HRAM (thanks to ISSOtm)
+- Added some more variables for Game Boy, most notably APU variables (thanks to ISSOtm)
+- Improved wording in table headers of profiler (thanks to ISSOtm)
+- Fixed that if the status bar of the Memory Editor grows after selection, it could hide the selected address
+- Fixed that for Mastersystem VRAM write events the old and new value were swapped (thanks to Aissen)
+- Fixed a regression that could cause unsigned variables in remote debugging to be displayed with signed values (thanks to MyNewSoundtrack)
+- Fixed a regression that could cause wrong breakpoints to be added when double-clicking the ruler on banked code (thanks to purple tissue box)
+- Fixed a bug where the disassembler did not amend an instruction on a sub-instruction boundary (thanks to ISSOtm)
+
+==========
+2023-02-28
+==========
+- Added support for debugfiles (thanks to ax6 and ISSOtm)
+- Added options for font anti aliasing (thanks to ISSOtm)
+- Made most variables in the Variables tab editable (thanks to leina)
+- Made the Memory Editor reduce the spacing between bytes if Show Registers is disabled (thanks to ISSOtm)
+- Improved invalid VDP access exception to catch a case that hadn't been caught yet (thanks to sverx)
+- Fixed a crash that could be caused by cheats (thanks to Revo)
+- Fixed an issue that had caused memory mapped ports to not be displayed using their names (thanks to ISSOtm)
+- Fixed an issue in the Memory Tracer that could make it display an incorrect source for WRAM (thanks to ISSOtm)
+- Fixed the tooltip shown when hovering hli (thanks to ISSOtm)
+- Fixed an issue that could cause the disassembler to timeout too quickly when remote debugging (thanks to pokeglitch)
+- Fixed the mnemonic used for the ldh opcode using the c register (thanks to ax6)
+- Fixed that code didn't get amended when its being executed on a sub-instruction byte (thanks to ISSOtm and Maxim)
+- Fixed color of caret in dark mode if OS uses light mode
+- Fixed an issue in the Sprite Viewer that could falsly display sprites as 8x16 (thanks to 256)
+
+==========
+2023-01-31
+==========
+- Added tooltips to breakpoints table (thanks to lestar)
+- Added an option to control whether .sav files should be saved next to the roms or not (thanks to Kuro)
+- Improved breakpoint management (thanks to 256)
+- Fixed a few issues in the disassembler (thanks to bankbank)
+
+==========
+2022-12-30
+==========
+- Added support for Gamepads on M1 Macs (thanks to mattcurrie)
+- Made Set Code / Set Data with multiple selected lines apply on all selected lines (thanks to bbbbbr)
+- Fixed an issue where remote debugging would suspend on start even though stopOnEntry is false (thanks to narbys)
+- Fixed a regression in Mastersystem / Game Gear sound emulation that could cause audible pops (thanks to Atmostfear)
+- Fixed a regression in MSX disk emulation that could cause disk operations to fail while they shouldn't (thanks to Zipper)
+- Fixed a regression with Game Boy joypad delays (thanks to Under4Mhz)
+- Fixed an issue with watch expressions referencing banked data in remote debugging (thanks to FerrantePescara)
+- Fixed an issue that could cause local variables to be missing when C debugging (thanks to FerrantePescara)
+
+==========
+2022-11-30
+==========
+- Added option to show tool windows in the Windows taskbar (thanks to Trirosmos)
+- Added support for sym files in UTF-8 format (thanks to Maxim)
+- Added options to change the window theme
+- Several UI improvements, most notably for dark theme
+- Fixed that the Event Viewer did not rerender immediately after changing the integer scaling setting
+- Fixed a regression that could cause Emulicious to crash with some dsk files (thanks to eruiz00)
+- Fixed a regression that could cause settings to not be saved on restart
+- Fixed a bug that could keep displaying a black screen on Linux until the window is resized (thanks to nitro2k01)
+- Fixed that on Linux the main window sometimes jumped in front of the debugger window (thanks to sverx)
+- Fixed that sometimes the debugger window did not get brought to top when it should (thanks to sverx and bbbbbr)
+
+==========
+2022-11-12
+==========
+- Fixed a regression that could cause breakpoints set via remote debugging to break on wrong lines (thanks to FerrantePescara)
+
+==========
+2022-10-31
+==========
+- Added change indicator for ROM tab of the Memory Editor (thanks to 256)
+- Improved performance of debug mode
+- Fixed that profilers did not get persisted properly when loading another ROM
+- Fixed that sometimes when loading a Game Boy savestate the initial image contained garbage (thanks to DevEd)
+- Fixed an issue that could cause a toolbar icon in the debugger to display as a black square
+- Fixed a bug that could rarely cause Emulicious to save a corrupted Game Boy savestate (thanks to bbbbbr)
+
+==========
+2022-10-07
+==========
+- Fixed a regression in the YM2413 emulation that made it sound noisy (thanks to bengalack)
+- Fixed duplicated Locals scope in remote debugging (thanks to darkowl)
+- Fixed an issue that caused crackling noise when recording the YM2413 alone
+- Fixed an issue related to installed gamepads that could prevent Emulicious from starting (thanks to VOXEL)
+
+==========
+2022-10-01
+==========
+- Fixed breakpoints set via remote debugging (thanks to Mallow)
+
+==========
+2022-09-30
+==========
+- Added missing base addresses in Tilemap Viewer for tile based modes on MSX2 (thanks to Bengalak)
+- Improved focus traversal via TAB and Shift+TAB in the debugger (thanks to FIQ)
+- Fixed that the data execution exception did not take the Suspend setting into account (thanks to superdisk)
+- Fixed an issue that could cause an exception to get disabled by reloading a ROM (thanks to superdisk)
+- Fixed that sometimes WRAM labels were missing in Memory Editor's Go To dialog (thanks to FIQ)
+- Fixed an issue with loading a savestate while the Game Boy is stuck in STOP (thanks to FIQ)
+- Fixed missing symbols if RGBDS map files only contains sections (thanks to FIQ)
+
+==========
+2022-09-10
+==========
+- Fixed false positive on nested interrupts in the interrupt exception (thanks to Eievui, asie)
+- Fixed an issue with modal dialogs (e.g. Configure Input) on Mac OS (thanks to Snoopdroop, armixer24)
+- Slightly reduced startup time
+
+==========
+2022-08-31
+==========
+- Added sorting by column to RAM Search tool and added a right-click menu (thanks to Crash)
+- Fixed issue with watch expressions in remote debugging displaying the same subvariables (thanks to Banks)
+- Fixed tracking of uninitialized memory on MSX (thanks to wimpie3)
+- Fixed that saving wasn't possible from all tabs of the Memory Editor (thanks to klop)
+- Fixed an issue with parsing ELIF in sources compiled with RGBDS (thanks to FIQ)
+- Fixed palettes displayed in Palette Viewer in Game Boy Color's DMG mode (thanks to bbbbbr)
+- Fixed an issue with sprite mixing on MSX2 (thanks to aoineko, bengalack)
+- Fixed a regression with CRAM writes on Game Gear (thanks to Maxim, Revo)
+
+==========
+2022-07-31
+==========
+- Added MSX2 emulation
+- Improved scoping of C local variables in VS Code (thanks to Streuwinkel)
+- Improved parsing of Sjasm lst files (thanks to bas)
+- Made pause shortcut configurable (thanks to Kabcorp)
+- Fixed an issue with persisting window positions at the left edge of the screen (thanks to aoineko)
+- Fixed that the Memory Editor did sometimes not open when clicking a VRAM address in the viewers (thanks to bas)
+- Fixed an issue with negative numbers in VS Code
+- Fixed an issue in C debugging with files containing spaces or dashes (thanks to Streuwinkel)
+- Fixed a bug in Game Boy noise channel emulation that could cause audible clicks (thanks to tbsp, Matt Hughson)
+- Fixed the value displayed for the Z80's R register (thanks to sverx)
+
+==========
+2022-07-01
+==========
+- Fixed an issue that could cause the Event Viewer to lag on selections
+
+==========
+2022-06-30
+==========
+- Added sound recording (thanks to Kabcorp)
+- Added option to enable/disable high-pass filter for Game Boy (thanks to Kabcorp)
+- Improved visibily of theme options by also adding them to the Appearance menu (thanks to Chong)
+- Combined the emulation menus for Game Boy and Game Boy Color
+- Made key shortcuts for exit and screenshot configurable (thanks to Under4MHz)
+- Also display referenced values for instructions operating on 2-bytes (thanks to sverx)
+- Fixed an issue with the stack view when debugging on MSX (thanks to aoineko)
+- Fixed an issue that could cause local variables to be missing with C debugging (thanks to Studio Loading)
+- Fixed that the main window key shortcuts did not work on the debugger anymore (thanks to tbsp)
+
+==========
+2022-05-31
+==========
+- Added filter for reads to the Event Viewer
+- Added support for multi-byte symbols from tbl files (thanks to borkitall)
+- Added configurable keyboard shortcuts for exit and screenshot (thanks to Under4Mhz)
+- Minor speedup of Game Boy emulation
+- Better handle PUSHS/POPS in Outline (thanks to Eievui)
+- Fixed that for the SMS/MSX VDP old value and new value were swapped in the Event Viewer (thanks to sverx)
+- Fixed a layout issue on Mac OS (thanks to vinheim3)
+- Fixed a layout issue with the registers table (thanks to bbbbbr)
+- Fixed a layout issue with the expressions table on Ubuntu (thanks to bbbbbr)
+- Fixed a sound resampling issue (thanks to alexmush)
+- Fixed that the savestates did not correctly restore the state of the SMS audio mixer (thanks to alexmush)
+- Fixed an issue that could prevent the Profile From Line option to add a profiler (thanks to bbbbbr)
+- Fixed an issue that made signed C types display unsigned values in the VS Code adapter (thanks to Eric Abroad)
+- Fixed an issue that could lead to unmapped lines when using RGBDS's FOR directive (thanks to rondnelson99)
+
+==========
+2022-05-03
+==========
+- Fixed a regression that could cause loading savestates on Master System games to crash (thanks to Atmostfear)
+- Fixed an issue int the Event Viewer that could cause it to update more often than it should (thanks to Eievui)
+- Fixed a regression that could in rare cases cause Master System games to display a wrong color (thanks to Atmostfear)
+
+==========
+2022-04-30
+==========
+- Added Event Viewer
+- Added some notes on troubleshooting to the ReadMe.txt
+- Allow pressing Reset in the Profiler while it's enabled (thanks to bbbbbr)
+- Fixed that sometimes a wrong value was displayed as old value for HRAM writes
+- Fixed missing local variables in of functions defined in included .c files (thanks to djlink)
+- Fixed a memory leak in the Trace Logger window (thanks to Revo)
+
+==========
+2022-04-07
+==========
+- Fixed hex values displayed for negative values in the Sprite Viewer (thanks to Maxim)
+- Fixed crash of the debugger when loading a different ROM
+
+==========
+2022-04-06
+==========
+- Fixed a bug that caused input to stop working on Mac OS (thanks to NoFr1ends)
+- Fixed an issue that could cause debugging of code in WRAM on Game Boy Color to misbehave (thanks to bbbbbr)
+- Fixed an issue with resizing the window when a non 1:1 PAR is selected
+
+==========
 2022-04-05
 ==========
 - Fixed a bug that could cause MSX2SMS conversions and SG-1000 games not to boot (thanks to Revo and Under4Mhz)
