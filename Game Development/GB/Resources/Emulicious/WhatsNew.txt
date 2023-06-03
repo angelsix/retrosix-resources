@@ -1,4 +1,25 @@
 ==========
+2023-06-01
+==========
+- Added Step Back Over action to the debugger
+- Fixed an issue with the Step Back Return action
+
+==========
+2023-05-31
+==========
+- Added a disassembler setting to pad mnemonics (thanks to Kak)
+- Added a proper error if a debugfile ends unexpectedly (thanks to leina)
+- Added selection of tile base address to Tilemap Viewer (thanks to leina)
+- Added Step Back Return action to the debugger
+- Added Run Backwards To Line action to the debugger
+- Allow changing sound buffer size without realod (thanks to Zumi)
+- Fixed that sometimes execution broke twice on a line breakpoint
+- Fixed that for more complex expressions the tooltip text did not display correct values (thanks to ISSOtm)
+- Fixed a regression where sometimes a line breakpoint could not be set on a line in a high bank (thanks to arnaud33200)
+- Fixed that on some Linux systems sound randomly silenced (thanks to Zumi)
+- Fixed that sometimes exception breakpoints would point to the line after the exception happened (thanks to CeL)
+
+==========
 2023-04-22
 ==========
 - Added Step Back to the debugger
