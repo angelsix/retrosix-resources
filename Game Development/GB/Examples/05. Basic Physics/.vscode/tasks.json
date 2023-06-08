@@ -5,10 +5,10 @@
             "label": "Build ROM",
             "type": "shell",
             "windows": {
-                "command": "mkdir build & ..\\..\\Resources\\gbdk-win\\bin\\lcc -debug -o build\\game.gb main.c Tiles\\tileseT_rusty.c Tiles\\tileset_level.c"
+                "command": "mkdir build & ..\\..\\Resources\\gbdk-win\\bin\\lcc -debug -o build\\game.gb main.c Tiles\\tileseT_rusty.c Tiles\\tileseT_rusty_small.c Tiles\\tileset_level.c"
             },
             "osx": {
-                "command": "mkdir build; ../../Resources/gbdk-mac/bin/lcc -debug -o build/game.gb main.c rusty_tiles.c Tiles/tileset_rusty.c Tiles/tileset_level.c"
+                "command": "mkdir build; ../../Resources/gbdk-mac/bin/lcc -debug -o build/game.gb main.c rusty_tiles.c Tiles\\tileseT_rusty.c Tiles/tileset_rusty_small.c Tiles/tileset_level.c"
             },
             "problemMatcher": ["$msCompile", "$gcc"],
             "group": {

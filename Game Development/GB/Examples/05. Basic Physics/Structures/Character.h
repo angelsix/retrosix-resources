@@ -20,8 +20,8 @@ typedef struct Character
     // The current frame the sprite is on
     uint8_t spriteCurrentFrame;
     
-    // The start index where the tiles start for this sprite
-    uint8_t tilemapStart;
+    // The start index where the tiles starts inside the set
+    uint8_t tilesetStart;
 
     // The sprite X position (top left)
     uint8_t x;
@@ -34,6 +34,12 @@ typedef struct Character
 
     // The current speed of travel in the Y direction
     uint8_t velocityY;
+
+    // The movement force wanting to act upon the X direction
+    int8_t movementForceX;
+
+    // The movement force wanting to act upon the Y direction
+    int8_t movementForceY;
     
     // A pointer to the tilemap
     const unsigned char *tilemap;
@@ -52,7 +58,7 @@ void LoadSpriteFrame(Character *character, uint8_t frame)
     for (uint8_t i = 0; i != spriteCount; i++)
     {
         // Set sprite tile
-        set_sprite_tile(character->spriteId + i, character->tilemap[character->tilemapStart + i + (frame * spriteCount)]);
+        set_sprite_tile(character->spriteId + i, character->tilemap[i + (frame * spriteCount)] + character->tilesetStart);
     }
 }
 
@@ -75,7 +81,7 @@ void MoveCharacter(Character *character, uint8_t x, uint8_t y)
     }
 }
 
-void ScrollCharacter(Character *character, uint8_t x, uint8_t y)
+void ScrollCharacter(Character *character, int8_t x, int8_t y)
 {
     character->x += x;
     character->y += y;
@@ -88,8 +94,8 @@ void MoveCharacterWithJoypad(Character *character)
     // Read buttons
     uint8_t buttons = joypad();
 
-    uint8_t moveX = 0;
-    uint8_t moveY = 0;
+    int8_t moveX = 0;
+    int8_t moveY = 0;
 
     if (buttons & J_LEFT)
     {
@@ -108,21 +114,26 @@ void MoveCharacterWithJoypad(Character *character)
     {
         moveY = 1;
     }
+    // Jumping
+    else if (buttons & J_A)
+    {
 
-    // Scroll character
-    ScrollCharacter(character, moveX, moveY);
+    }
 
+    // Set movement force
+    character->movementForceX = moveX;
+    character->movementForceY = moveY;
 }
 
 void SetupCharacter(Character *character, uint8_t spriteId,
-     uint8_t tileWidth, uint8_t tileHeight, uint8_t tilemapStart,
+     uint8_t tileWidth, uint8_t tileHeight, uint8_t tilesetStart,
      uint8_t totalFrames, const unsigned char *tilemap)
 {
     // Store pointer to tilemap
     character->tilemap = tilemap;
 
     // Set tile start position (in tileset)
-    character->tilemapStart = tilemapStart;
+    character->tilesetStart = tilesetStart;
 
     // Set player sprite ID
     character->spriteId = spriteId;
