@@ -1,0 +1,20 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build ROM",
+            "type": "shell",
+            "windows": {
+                "command": "mkdir build & ..\\..\\Resources\\gbdk-win\\bin\\lcc -debug -o build\\game.gb main.c Tiles\\rusty.c Tiles\\level.c"
+            },
+            "osx": {
+                "command": "mkdir build; ../../Resources/gbdk-mac/bin/lcc -debug -o build/game.gb main.c Tiles\\rusty.c Tiles/level.c"
+            },
+            "problemMatcher": ["$msCompile", "$gcc"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
