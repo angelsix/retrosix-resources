@@ -6,6 +6,7 @@
 a0 Port_PSGRegister out
 a1 Port_PSGData out
 a2 Port_PSGData in
+a8 Port_PPI_A
 a9 Port_Keyboard in
 fc Port_RAMMapper0 out
 fd Port_RAMMapper1 out
