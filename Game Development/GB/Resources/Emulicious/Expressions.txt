@@ -13,9 +13,13 @@ variables (see below)
 the @ operator to "read" a value from a calculated address
 the @@ operator to specifcy the location to read from (Usage: location@@address)
 the : operator to map a specified address to a specified bank (Usage: bank:address)
-the ? operator to retrive the bank at the specified address (Usage: ?address)
+the & operator to retrive the bank at the specified address (Usage: &address)
+the && operator to retrive the bank of the specified symbol (Usage: &&symbol)
+strings using quotation marks (Usage: "Hello World!")
+the , operator for string concatenation (Usage: "LY = ", rLY, "SCX = ", rSCX)
+value formatting in strings (Usage: "{format:expression}" Example: "Lives: {d:@lives}, Velocity X: {d:@velocityX}, {08b:@flags}, Type: {@type}, Name: {s:pointerToName}")
 
-Besides that the following variables are supported:
+Additional to that the following variables are supported:
 All register names (As single registers and as register pairs)
 Flag names followed by the letter f (For example zf for the zero flag)
 va (the current vdp address)
