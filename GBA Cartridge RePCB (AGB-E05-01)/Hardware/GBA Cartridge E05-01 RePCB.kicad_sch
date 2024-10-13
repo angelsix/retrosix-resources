@@ -1,0 +1,23 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "653f0c50-b1df-45a4-bbe0-ee4d6e712608")
+	(paper "A4")
+	(lib_symbols)
+	(text "Maybe todo if schematic is of any use :D"
+		(exclude_from_sim no)
+		(at 37.338 19.812 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "2f1443a3-c784-4b0a-8c51-b77c634dcf43")
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)
