@@ -36,10 +36,15 @@ The traces and Vias I redrew directly in KiCad using freeform paths, fillets and
 
 The end result was a very accurate reproduction.
 
-<img src="./Resources/GBA E05-01 (Front).jpg" />
-<img src="./Resources/AGB-E05-01 (Front) Preview.png" />
-<img src="./Resources/GBA E05-01 (Back).jpg" />
-<img src="./Resources/AGB-E05-01 (Back) Preview.png" />
+<img src="./Resources/GBA E05-01 (Front).jpg" width="500" />
+<img src="./Resources/AGB-E05-01 (Front) Preview.png" width="500" /><br>
+<img src="./Resources/GBA E05-01 (Back).jpg" width="500" />
+<img src="./Resources/AGB-E05-01 (Back) Preview.png" width="500" /><br>
+
+Here is an overlay of the real original board and the rendered output. You can see it is almost identical. There are still minor improvements that I have since done after this image render.
+
+<img src="./Resources/Top Animation.gif" width="1000" /><br>
+<img src="./Resources/Bottom Animation.gif" width="1000" />
 
 ## PCB Specification
 
