@@ -643,6 +643,24 @@
 		)
 		(symbol "LR35902_(DMG_CPU)_1_1"
 			(pin power_in line
+				(at -2.54 99.06 0)
+				(length 2.54)
+				(name "VIN"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "61"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
 				(at -2.54 96.52 0)
 				(length 2.54)
 				(name "VDD"
@@ -1535,24 +1553,6 @@
 					)
 				)
 				(number "77"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
-				(at 76.2 99.06 180)
-				(length 2.54)
-				(name "CART_AUDIO"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "61"
 					(effects
 						(font
 							(size 1.27 1.27)
