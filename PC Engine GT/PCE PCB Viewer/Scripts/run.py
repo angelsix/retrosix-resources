@@ -71,6 +71,11 @@ def find_available_port(host, start_port):
     sys.exit(1)
 
 
+class ReusableTCPServer(socketserver.TCPServer):
+    """TCPServer that releases the port immediately on shutdown."""
+    allow_reuse_address = True
+
+
 def serve(root, host, port):
     """Start the HTTP server and open the browser."""
     os.chdir(root)
@@ -81,22 +86,24 @@ def serve(root, host, port):
     handler.log_message = lambda self, fmt, *args: None
 
     try:
-        httpd = socketserver.TCPServer((host, port), handler)
+        httpd = ReusableTCPServer((host, port), handler)
     except OSError:
         port = find_available_port(host, port)
-        httpd = socketserver.TCPServer((host, port), handler)
+        httpd = ReusableTCPServer((host, port), handler)
 
     url = f"http://{host}:{port}"
     print(f"[OK] Server running at {url}")
     print(f"     Press Ctrl+C to stop\n")
 
-    # Graceful shutdown on Ctrl+C
+    # Graceful shutdown on Ctrl+C or terminal close
     def shutdown(sig, frame):
         print("\nShutting down...")
-        httpd.shutdown()
+        httpd.server_close()
         sys.exit(0)
 
     signal.signal(signal.SIGINT, shutdown)
+    signal.signal(signal.SIGTERM, shutdown)
+    signal.signal(signal.SIGHUP, shutdown)
 
     webbrowser.open(url)
     httpd.serve_forever()
