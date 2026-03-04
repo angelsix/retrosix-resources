@@ -354,3 +354,8 @@ MigrationBackup/
 .ionide/
 
 claudecli-history.json
+
+# KiCad temporary files
+*-backups/
+~*.lck
+*.bak
