@@ -359,3 +359,4 @@ claudecli-history.json
 *-backups/
 ~*.lck
 *.bak
+.history/
