@@ -832,7 +832,7 @@
 			)
 		)
 		(property "Description" "Game Boy DMG CPU"
-			(at 20.066 -4.318 0)
+			(at 9.398 -10.668 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(hide yes)
@@ -1614,7 +1614,7 @@
 				)
 			)
 			(pin output line
-				(at -2.54 17.78 0)
+				(at -2.54 20.32 0)
 				(length 2.54)
 				(name "~{MCS}"
 					(effects
@@ -1650,7 +1650,7 @@
 				)
 			)
 			(pin output line
-				(at -2.54 15.24 0)
+				(at -2.54 17.78 0)
 				(length 2.54)
 				(name "~{MREAD}"
 					(effects
@@ -1722,7 +1722,7 @@
 				)
 			)
 			(pin output line
-				(at -2.54 12.7 0)
+				(at -2.54 15.24 0)
 				(length 2.54)
 				(name "~{MWRITE}"
 					(effects
@@ -1740,7 +1740,7 @@
 				)
 			)
 			(pin output line
-				(at 10.16 5.08 90)
+				(at 35.56 5.08 90)
 				(length 2.54)
 				(name "LD1"
 					(effects
@@ -1758,7 +1758,7 @@
 				)
 			)
 			(pin output line
-				(at 12.7 5.08 90)
+				(at 38.1 5.08 90)
 				(length 2.54)
 				(name "LD0"
 					(effects
@@ -1776,7 +1776,7 @@
 				)
 			)
 			(pin output line
-				(at 15.24 5.08 90)
+				(at 45.72 5.08 90)
 				(length 2.54)
 				(name "CPG"
 					(effects
@@ -1794,7 +1794,7 @@
 				)
 			)
 			(pin output line
-				(at 17.78 5.08 90)
+				(at 33.02 5.08 90)
 				(length 2.54)
 				(name "CP"
 					(effects
@@ -1812,7 +1812,7 @@
 				)
 			)
 			(pin output line
-				(at 20.32 5.08 90)
+				(at 40.64 5.08 90)
 				(length 2.54)
 				(name "ST"
 					(effects
@@ -1830,7 +1830,7 @@
 				)
 			)
 			(pin output line
-				(at 22.86 5.08 90)
+				(at 43.18 5.08 90)
 				(length 2.54)
 				(name "CPL"
 					(effects
@@ -1848,7 +1848,7 @@
 				)
 			)
 			(pin output line
-				(at 25.4 5.08 90)
+				(at 30.48 5.08 90)
 				(length 2.54)
 				(name "FR"
 					(effects
@@ -1956,7 +1956,7 @@
 				)
 			)
 			(pin output line
-				(at 48.26 5.08 90)
+				(at 20.32 5.08 90)
 				(length 2.54)
 				(name "P15"
 					(effects
@@ -1992,7 +1992,7 @@
 				)
 			)
 			(pin input line
-				(at 43.18 5.08 90)
+				(at 12.7 5.08 90)
 				(length 2.54)
 				(name "P13"
 					(effects
@@ -2010,7 +2010,7 @@
 				)
 			)
 			(pin input line
-				(at 40.64 5.08 90)
+				(at 15.24 5.08 90)
 				(length 2.54)
 				(name "P12"
 					(effects
@@ -2028,7 +2028,7 @@
 				)
 			)
 			(pin input line
-				(at 38.1 5.08 90)
+				(at 7.62 5.08 90)
 				(length 2.54)
 				(name "P11"
 					(effects
@@ -2046,7 +2046,7 @@
 				)
 			)
 			(pin input line
-				(at 35.56 5.08 90)
+				(at 17.78 5.08 90)
 				(length 2.54)
 				(name "P10"
 					(effects
