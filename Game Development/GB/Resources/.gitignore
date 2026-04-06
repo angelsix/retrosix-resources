@@ -3,3 +3,6 @@
 
 !gbdk-win/*
 !gbdk-mac/*
+
+# Claude CLI history
+.claude/claudecli-history.json

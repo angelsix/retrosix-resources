@@ -360,3 +360,6 @@ claudecli-history.json
 ~*.lck
 *.bak
 .history/
+
+# Claude CLI history
+.claude/claudecli-history.json

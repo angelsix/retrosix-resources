@@ -1,1 +1,3 @@
 build/
+# Claude CLI history
+.claude/claudecli-history.json
