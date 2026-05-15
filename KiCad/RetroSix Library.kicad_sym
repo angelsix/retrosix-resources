@@ -1902,7 +1902,7 @@
 				)
 			)
 			(pin output line
-				(at 76.2 92.71 180)
+				(at 76.2 96.52 180)
 				(length 2.54)
 				(name "ROUT"
 					(effects
@@ -1920,7 +1920,7 @@
 				)
 			)
 			(pin output line
-				(at 76.2 95.25 180)
+				(at 76.2 99.06 180)
 				(length 2.54)
 				(name "LOUT"
 					(effects
@@ -1938,7 +1938,7 @@
 				)
 			)
 			(pin input line
-				(at 76.2 99.06 180)
+				(at 76.2 91.44 180)
 				(length 2.54)
 				(name "CART_AUDIO"
 					(effects
