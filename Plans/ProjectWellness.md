@@ -1,6 +1,6 @@
 # Project Wellness — end-of-day auto-commit
 
-End-of-day sweep on 2026-05-30 found `AgentDocumentation/Project.md` missing; `Memory.md` and `Glossary.md` are in place.
+End-of-day sweep on 2026-05-31 found `AgentDocumentation/Project.md` missing; `Memory.md` and `Glossary.md` are in place.
 
 ## The plan
 
