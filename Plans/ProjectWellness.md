@@ -1,8 +1,9 @@
-# Project Wellness — end-of-day auto-commit
-
-End-of-day sweep on 2026-05-31 found `AgentDocumentation/Project.md` missing; `Memory.md` and `Glossary.md` are in place.
-
+# Project wellness
+Status: Ready
+End-of-day sweep on 2026-05-31 found one groundwork gap in this repo: `AgentDocumentation/Sessions/` is missing.
 ## The plan
-
-1. Run the `project-brief` skill to build `AgentDocumentation/Project.md` from the codebase (don't hand-stub it — the skill surveys the code and interviews Luke).
-2. Once `Project.md` is in, the `Sessions/` folder will be created automatically the next time a session writes to it.
+Seed the missing sessions folder so future session notes have the standard home.
+## Tasks
+- [ ] 1. Create `AgentDocumentation/Sessions/` in this repo.
+## Decisions and trade-offs
+This replaces an older stale note that claimed `AgentDocumentation/Project.md` was missing; it is present now.
