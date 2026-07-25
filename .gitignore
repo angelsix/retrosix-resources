@@ -366,3 +366,6 @@ claudecli-history.json
 
 # AI Mecca local state
 .aimecca/
+
+# AI Mecca Git reviewer commit plans
+.gitreviewer/
