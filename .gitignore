@@ -308,6 +308,8 @@ paket-files/
 
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
+.pytest_cache/
+.mypy_cache/
 *.pyc
 
 # Cake - Uncomment if you are using it
@@ -465,3 +467,17 @@ login.keychain
 *.key
 *.secret
 *.vault
+
+# Python virtual environments
+.venv/
+.venv
+venv/
+venv
+env/
+env
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
