@@ -461,9 +461,6 @@ login.keychain
 .git-credentials
 
 # General catch-alls
-*password*
-*credentials*
-*secret*
 *.key
 *.secret
 *.vault
