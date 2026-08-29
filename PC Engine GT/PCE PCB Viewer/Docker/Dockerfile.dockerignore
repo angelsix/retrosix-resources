@@ -1,0 +1,25 @@
+# Build-context ignore rules for the PCE PCB Viewer image.
+#
+# The Dockerfile is single-stage and does `COPY . .`, so anything left in the
+# context is baked into the image the server runs from. Secrets and local state
+# must not be in there — `guard security web-exposure` gates this.
+
+# Secrets
+.env
+.env.local
+.env.*.local
+
+# Version control and local agent/editor state
+.git
+.gitignore
+.aimecca
+.claude
+.vscode
+.idea
+
+# Reinstalled inside the image by `npm ci`
+node_modules
+
+# OS noise
+.DS_Store
+Thumbs.db
