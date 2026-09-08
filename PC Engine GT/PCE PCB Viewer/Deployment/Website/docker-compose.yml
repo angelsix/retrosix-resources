@@ -1,0 +1,37 @@
+# The PC Engine PCB Viewer — one container serving a static board viewer.
+#
+#   Deployment/Deploy.command           (the console; or, by hand, from this folder:)
+#   docker compose up -d --build
+#
+# Project name, stated rather than inferred. Compose otherwise takes it from the directory the file
+# sits in, so this stack was called "docker" and would have silently become "website" when the
+# folder moved. Nothing here has a named volume for that to orphan, but the next thing added would.
+name: pce-boardview
+
+services:
+  pce-boardview:
+    build:
+      # The viewer's own folder — two levels up from Deployment/Website. It was one level when this
+      # lived in Docker/, and the count is the whole reason a moved compose file stops building.
+      context: ../..
+      dockerfile: Deployment/Website/Dockerfile
+    image: pce-boardview:latest
+    container_name: pce-boardview
+    environment:
+      # server.js defaults host to 127.0.0.1, which inside a container means the container's own
+      # loopback and nothing published can reach it. 0.0.0.0 here is correct and is not the same
+      # decision as the published address below: this is inside the container, that is the host.
+      HOST: 0.0.0.0
+      PORT: 8080
+    ports:
+      # Published on ONE host address, not all of them. This was "8001:8080", which binds 0.0.0.0
+      # and puts the viewer on the LAN directly. Site Host's rule is that a site container publishes
+      # to loopback only and Caddy is the sole LAN listener.
+      - "${WEB_BIND_ADDRESS:-127.0.0.1}:${WEB_PORT:-8001}:8080"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped

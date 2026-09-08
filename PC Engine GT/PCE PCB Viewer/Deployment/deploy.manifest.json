@@ -1,0 +1,136 @@
+{
+  // The PC Engine PCB Viewer deployment, described once so the console can drive it.
+  //
+  // Open it with Deploy.command in this project's folder. Note that "the repository root" for this
+  // deployment is the viewer's own folder, not retrosix-resources — that repository holds board
+  // scans, KiCad projects and documentation for a dozen consoles, and only this corner of it is a
+  // hosted site.
+  "schemaVersion": 1,
+
+  "project": {
+    "name": "PC Engine PCB Viewer",
+    "blurb": "An interactive board viewer for the PC Engine GT — scans, nets and component lookup in a browser.",
+    "architecture": "**One container, one static Node server.** `node:18-alpine` runs `server.js`, which serves the viewer and its board assets. No database, no build step beyond `npm ci`, and no bind mount — everything it serves is baked into the image, so a redeploy is a new image and nothing else.\n\nTwo addresses are easy to confuse and they are different decisions. `HOST=0.0.0.0` is set **inside** the container because `server.js` defaults to `127.0.0.1`, which in a container means the container's own loopback — nothing published could reach it. `WEB_BIND_ADDRESS` is the address on the **host**, and that one is loopback on purpose so the viewer is only reachable through the Caddy that terminates its TLS.\n\nThe image is single-stage and does `COPY . .`, so anything left in the build context is baked into what the server serves. `Dockerfile.dockerignore` is what keeps secrets and local state out of it, and `guard security web-exposure` gates that.",
+    "web": {
+      "bindSetting": "WEB_BIND_ADDRESS",
+      "portSetting": "WEB_PORT"
+    },
+    "links": [
+      { "label": "Deployment notes", "path": "Deployment/Website/README.md" }
+    ]
+  },
+
+  "prereqs": [
+    { "kind": "command-available", "command": "docker", "label": "Docker is installed" },
+    {
+      "kind": "docker-running",
+      "label": "Docker is running",
+      "remedy": "Start Docker Desktop (or `systemctl start docker` on a Linux host) and wait for it to come up."
+    },
+    { "kind": "disk-free", "path": ".", "minGb": 2, "label": "There is room for a new image" }
+  ],
+
+  "settings": [
+    {
+      "key": "WEB_PORT",
+      "file": "Deployment/Website/.env",
+      "label": "Web port",
+      "help": "The host port the viewer publishes on. Caddy proxies to it, so changing it means changing Caddy too.",
+      "type": "port",
+      "default": "8001",
+      "required": true
+    },
+    {
+      "key": "WEB_BIND_ADDRESS",
+      "file": "Deployment/Website/.env",
+      "label": "Bind address",
+      "help": "The host address the port is published on. Loopback keeps the viewer off the LAN so it can only be reached through the proxy. Not to be confused with HOST inside the container, which must be 0.0.0.0 or nothing published can reach the server at all.",
+      "type": "text",
+      "default": "127.0.0.1",
+      "required": true
+    }
+  ],
+
+  "profiles": [
+    {
+      "id": "production",
+      "label": "Production",
+      "danger": "low",
+      "openUrl": "http://localhost:{WEB_PORT}/",
+      "steps": ["configure", "deploy"],
+      "health": [
+        {
+          "kind": "http-status",
+          "url": "http://localhost:{WEB_PORT}/",
+          "label": "The viewer answers",
+          "fixedBy": "deploy"
+        },
+        {
+          "kind": "container-healthy",
+          "name": "pce-boardview",
+          "label": "The container is healthy and not restart-looping",
+          "fixedBy": "deploy"
+        },
+        { "kind": "disk-free", "path": ".", "minGb": 2, "label": "There is disk headroom" }
+      ],
+      "manage": {
+        "containers": [
+          { "name": "pce-boardview", "role": "The board viewer" }
+        ]
+      }
+    }
+  ],
+
+  "steps": [
+    {
+      "id": "configure",
+      "title": "Configure the port",
+      "importance": "required",
+      "why": "Sets the host port and the address it is published on, in `Deployment/Website/.env`.\n\nThe compose file used to publish `8001:8080`, which binds `0.0.0.0` and puts the viewer on the LAN directly, around the Caddy that terminates its TLS. Loopback is the right answer for this site: nothing calls it from another container.",
+      "detect": [
+        { "kind": "env-key-set", "file": "Deployment/Website/.env", "key": "WEB_PORT" },
+        { "kind": "env-key-set", "file": "Deployment/Website/.env", "key": "WEB_BIND_ADDRESS" }
+      ],
+      "inputs": [
+        { "name": "WEB_PORT", "label": "Web port", "type": "port", "settingKey": "WEB_PORT" },
+        { "name": "WEB_BIND_ADDRESS", "label": "Bind address", "type": "text", "settingKey": "WEB_BIND_ADDRESS" }
+      ],
+      "run": { "kind": "settings", "keys": ["WEB_PORT", "WEB_BIND_ADDRESS"] },
+      "replaces": []
+    },
+
+    {
+      "id": "deploy",
+      "title": "Deploy the viewer",
+      "importance": "required",
+      "why": "Builds the image and starts the container. Nothing persists outside the image, so there is nothing to back up first and nothing a redeploy can leave behind.\n\nThe console waits for the viewer to answer rather than trusting that the container started — a container that is running is not an app that is serving, and a crash-looping one reports \"running\" in a plain listing.",
+      "dependsOn": ["configure"],
+      "detect": [
+        { "kind": "http-status", "url": "http://localhost:{WEB_PORT}/" }
+      ],
+      "run": {
+        "kind": "compose-up",
+        "folder": "Deployment/Website",
+        "files": ["docker-compose.yml"],
+        "project": "pce-boardview",
+        "waitForHealthy": "pce-boardview",
+        "waitTimeoutSeconds": 300
+      },
+      "verify": [
+        { "kind": "http-status", "url": "http://localhost:{WEB_PORT}/", "label": "The viewer answers" }
+      ],
+      "replaces": []
+    }
+  ],
+
+  "retained": [
+    {
+      "path": "Scripts/run.py",
+      "reason": "Runs the viewer natively for development, outside Docker. Not a deployment step."
+    },
+    {
+      "path": "run.bat",
+      "reason": "The Windows equivalent of Scripts/run.py — a local development launcher, not a deployment step."
+    }
+  ]
+}
