@@ -8,6 +8,7 @@
   "schemaVersion": 1,
 
   "project": {
+    "id": "pce-pcb-viewer",
     "name": "PC Engine PCB Viewer",
     "blurb": "An interactive board viewer for the PC Engine GT — scans, nets and component lookup in a browser.",
     "architecture": "**One container, one static Node server.** `node:18-alpine` runs `server.js`, which serves the viewer and its board assets. No database, no build step beyond `npm ci`, and no bind mount — everything it serves is baked into the image, so a redeploy is a new image and nothing else.\n\nTwo addresses are easy to confuse and they are different decisions. `HOST=0.0.0.0` is set **inside** the container because `server.js` defaults to `127.0.0.1`, which in a container means the container's own loopback — nothing published could reach it. `WEB_BIND_ADDRESS` is the address on the **host**, and that one is loopback on purpose so the viewer is only reachable through the Caddy that terminates its TLS.\n\nThe image is single-stage and does `COPY . .`, so anything left in the build context is baked into what the server serves. `Dockerfile.dockerignore` is what keeps secrets and local state out of it, and `guard security web-exposure` gates that.",
