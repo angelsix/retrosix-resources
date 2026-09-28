@@ -1,0 +1,15 @@
+# gitleaks configuration for `guard security gitleaks`.
+#
+# The default rules, plus exemptions earned one hit at a time. Every entry names ONE file and the exact
+# value it forgives, with a dated reason; nothing is exempted by directory. The check reports each
+# exempted hit with its description, so an entry here can never hide a finding silently.
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "2026-09-28: a slice of an embedded PNG image's base64 data in the KiCad board file that happens to match the square-access-token shape; not a credential."
+condition = "AND"
+paths = ['''^GBA Cartridge RePCB \(AGB\-E05\-01\)/Hardware/GBA Cartridge E05\-01 RePCB\.kicad_pcb$''']
+regexTarget = "secret"
+regexes = ['''^EAAAgAElEQVQXb6SGT88jd2vP1b9d$''']
