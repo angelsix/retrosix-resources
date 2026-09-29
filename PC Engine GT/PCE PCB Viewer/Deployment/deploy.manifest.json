@@ -124,6 +124,9 @@
     }
   ],
 
+  // No demo-live profile, and why: the reason says what would have to change for it to need one.
+  "demoLive": { "reason": "Static viewer with everything baked into the image: no database, no uploads, no keys, and not hosted on Site Host, so there is nothing live to copy. It would need one only if it started storing data." },
+
   "retained": [
     {
       "path": "Scripts/run.py",
