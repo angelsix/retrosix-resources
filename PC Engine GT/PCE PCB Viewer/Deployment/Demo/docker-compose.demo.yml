@@ -1,0 +1,35 @@
+# The PC Engine PCB Viewer DEMO stack — the demo-live profile's viewer. A standalone file, NOT an
+# overlay on Deployment/Website/docker-compose.yml, so it cannot inherit production's container
+# name, image tag or port: it runs beside a live viewer on the same box without touching it.
+#
+# TEST MODE IS HARD-WIRED ON. PCE_VIEWER_TEST_MODE is a literal "true", not a setting, and the image
+# built here is stamped as a demo copy (Deployment/Demo/Dockerfile). server.js refuses to start when
+# the two disagree. The viewer sends nothing, so test mode stubs nothing: the guard is that a demo
+# image is never run, or mistaken, as production.
+name: demolive-pce-boardview
+
+services:
+  pce-boardview-demo:
+    build:
+      # The viewer's own folder, two levels up, exactly as production builds it.
+      context: ../..
+      dockerfile: Deployment/Demo/Dockerfile
+    image: demolive-pce-boardview:latest
+    container_name: demolive-pce-boardview
+    environment:
+      # Inside the container, as production: 127.0.0.1 would be the container's own loopback.
+      HOST: 0.0.0.0
+      PORT: 8080
+      PCE_VIEWER_TEST_MODE: "true"
+    ports:
+      # Loopback only, on the demo's own port — never production's WEB_PORT.
+      - "127.0.0.1:${DEMO_PORT:-8101}:8080"
+    healthcheck:
+      # 127.0.0.1, not localhost: in this image localhost resolves to ::1 first, and the server listens
+      # on IPv4 only (HOST 0.0.0.0), so a localhost probe is refused and the container never turns healthy.
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:8080/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 5s
+    restart: unless-stopped

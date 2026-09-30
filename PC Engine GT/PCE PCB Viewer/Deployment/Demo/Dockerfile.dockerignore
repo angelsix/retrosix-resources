@@ -1,4 +1,4 @@
-# Build-context ignore rules for the PCE PCB Viewer image.
+# Build-context ignore rules for the PCE PCB Viewer DEMO image (the same as production's).
 #
 # The Dockerfile is single-stage and does `COPY . .`, so anything left in the
 # context is baked into the image the server runs from. Secrets and local state

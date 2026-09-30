@@ -15,6 +15,9 @@ a hosted site.
 - `Dockerfile.dockerignore` — what stays out of the build context.
 - `.env` / `.env.example` — the port and bind address. `.env` is gitignored.
 
+The demo copy (the `demo-live` profile, and `sitehost demo`) has its own stack in `../Demo/`; see
+`../Demo/README.md`.
+
 ## The two addresses, which are different decisions
 
 `HOST=0.0.0.0` is set **inside** the container. `server.js` defaults to `127.0.0.1`, which in a

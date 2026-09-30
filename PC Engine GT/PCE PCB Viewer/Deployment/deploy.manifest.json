@@ -17,7 +17,8 @@
       "portSetting": "WEB_PORT"
     },
     "links": [
-      { "label": "Deployment notes", "path": "Deployment/Website/README.md" }
+      { "label": "Deployment notes", "path": "Deployment/Website/README.md" },
+      { "label": "Demo copy notes", "path": "Deployment/Demo/README.md" }
     ]
   },
 
@@ -49,6 +50,19 @@
       "type": "text",
       "default": "127.0.0.1",
       "required": true
+    },
+
+    // The demo-live profile's own setting, in its own file so nothing a demo writes can land in the
+    // production .env.
+    {
+      "key": "DEMO_PORT",
+      "file": "Deployment/Demo/.env",
+      "label": "Demo port",
+      "help": "The host port the demo viewer publishes on, loopback only. Must differ from the live viewer's WEB_PORT — the demo deploy refuses to run otherwise.",
+      "type": "port",
+      "default": "8101",
+      "required": true,
+      "profiles": ["demo-live"]
     }
   ],
 
@@ -77,6 +91,60 @@
       "manage": {
         "containers": [
           { "name": "pce-boardview", "role": "The board viewer" }
+        ]
+      }
+    },
+    // Demo from live: the SAME viewer code, stamped as a demo copy and in test mode, on its own port
+    // and container, so a release can be stood up and tested on a clean machine before it goes live.
+    //
+    // NO live-pull / live-restore, deliberately. The viewer holds no data: no database, no uploads,
+    // no keys, no volume — everything it serves is baked into the image. There is nothing live to
+    // copy, so the copy is built from the release itself, as MailBridge's starts from an empty volume.
+    // It sends nothing either, so test mode stubs nothing: the guard is the stamp and the switch
+    // agreeing, which server.js checks at startup (see Deployment/Demo/README.md).
+    {
+      "id": "demo-live",
+      "label": "Demo from live",
+      "danger": "low",
+      "openUrl": "http://localhost:{DEMO_PORT}/",
+      "steps": ["demo-configure", "demo-deploy", "demo-live-test", "demo-stop"],
+      // What a copy on another Site Host machine runs (`sitehost demo`). No group and no folder: there
+      // is no live data to fetch (see above). demo-stop stays out, since the copy is left running.
+      "demoCopy": { "steps": ["demo-configure", "demo-deploy", "demo-live-test"] },
+      "health": [
+        {
+          "kind": "http-status",
+          "url": "http://localhost:{DEMO_PORT}/health",
+          "label": "The demo viewer is serving",
+          "remedy": "Run \"Deploy the demo viewer\"."
+        },
+        {
+          "kind": "http-json",
+          "url": "http://localhost:{DEMO_PORT}/health",
+          "field": "testMode",
+          "equals": "true",
+          "label": "Test mode is on",
+          "remedy": "The viewer on the demo port is not in test mode. Stop it and run \"Deploy the demo viewer\" — the demo stack hard-wires PCE_VIEWER_TEST_MODE on."
+        },
+        {
+          "kind": "http-json",
+          "url": "http://localhost:{DEMO_PORT}/health",
+          "field": "demoCopy",
+          "equals": "demolive-pce-boardview",
+          "label": "The viewer is stamped as a demo copy",
+          "remedy": "The viewer on the demo port was not built from Deployment/Demo/Dockerfile. Run \"Deploy the demo viewer\"."
+        },
+        {
+          "kind": "container-env",
+          "namePattern": "demolive-pce-boardview",
+          "key": "PCE_VIEWER_TEST_MODE",
+          "equals": "true",
+          "label": "The demo container was started with test mode on"
+        }
+      ],
+      "manage": {
+        "containers": [
+          { "namePattern": "demolive-pce-boardview", "role": "Demo viewer (stamped demo copy, test mode on)" }
         ]
       }
     }
@@ -121,11 +189,83 @@
         { "kind": "http-status", "url": "http://localhost:{WEB_PORT}/", "label": "The viewer answers" }
       ],
       "replaces": []
+    },
+
+    {
+      "id": "demo-configure",
+      "title": "Configure the demo viewer",
+      "importance": "required",
+      "why": "The demo viewer's port, in `Deployment/Demo/.env` — its own file, so nothing a demo writes can land in the production `.env`. Published on loopback only, and never the live viewer's port.",
+      "detect": [
+        { "kind": "env-key-set", "file": "Deployment/Demo/.env", "key": "DEMO_PORT" }
+      ],
+      "inputs": [
+        { "name": "DEMO_PORT", "label": "Demo port", "type": "port", "settingKey": "DEMO_PORT" }
+      ],
+      "run": { "kind": "settings", "keys": ["DEMO_PORT"] },
+      "replaces": []
+    },
+
+    {
+      "id": "demo-deploy",
+      "title": "Deploy the demo viewer",
+      "importance": "required",
+      "why": "Builds the demo image (`Deployment/Demo/Dockerfile`: the production image plus a demo stamp) and starts `demolive-pce-boardview` on the demo port with **test mode hard-wired on**.\n\nIt is a separate compose project from production on purpose: its own container, image tag and port, so it cannot touch a live viewer on the same box. The viewer refuses to start if the stamp and test mode ever disagree, so this image cannot run as production and production's cannot run as a demo.",
+      "dependsOn": ["demo-configure"],
+      "availableWhen": [
+        {
+          "kind": "env-key-matches",
+          "file": "Deployment/Demo/.env",
+          "key": "DEMO_PORT",
+          "notEquals": "{WEB_PORT}",
+          "label": "The demo viewer is on its own port, not the live viewer's"
+        }
+      ],
+      "detect": [
+        { "kind": "http-json", "url": "http://localhost:{DEMO_PORT}/health", "field": "testMode", "equals": "true" }
+      ],
+      "run": {
+        "kind": "compose-up",
+        "folder": "Deployment/Demo",
+        "files": ["docker-compose.demo.yml"],
+        "build": true,
+        "waitForHealthy": "demolive-pce-boardview",
+        "waitTimeoutSeconds": 300
+      },
+      "verify": [
+        { "kind": "container-env", "namePattern": "demolive-pce-boardview", "key": "PCE_VIEWER_TEST_MODE", "equals": "true", "label": "Test mode is on in the demo container" },
+        { "kind": "http-json", "url": "http://localhost:{DEMO_PORT}/health", "field": "demoCopy", "equals": "demolive-pce-boardview", "label": "The demo viewer reports its demo stamp" }
+      ],
+      "replaces": []
+    },
+
+    {
+      "id": "demo-live-test",
+      "title": "Test the demo viewer",
+      "importance": "required",
+      "why": "Runs the site's tests against the running demo: `/health` must report test mode on and the demo stamp, the viewer page and its script must be served, and the viewer's own `node:test` suite runs inside the deployed container — including the startup refusals for a stamp without test mode and test mode without a stamp. A target machine needs Docker and curl, not Node.",
+      "dependsOn": ["demo-deploy"],
+      "run": {
+        "kind": "process",
+        "program": "bash",
+        "args": ["Deployment/Demo/Scripts/demo-live-test.sh"],
+        "timeoutSeconds": 300
+      },
+      "replaces": []
+    },
+
+    {
+      "id": "demo-stop",
+      "title": "Stop the demo viewer",
+      "importance": "optional",
+      "why": "Stops the demo container, keeping it. Nothing is deleted, and there is no data to clean: the demo holds nothing that was not in the release.",
+      "detect": [
+        { "kind": "container-running", "namePattern": "demolive-pce-boardview", "expect": false }
+      ],
+      "run": { "kind": "container-stop", "namePattern": "demolive-pce-boardview" },
+      "replaces": []
     }
   ],
-
-  // No demo-live profile, and why: the reason says what would have to change for it to need one.
-  "demoLive": { "reason": "Static viewer with everything baked into the image: no database, no uploads, no keys, and not hosted on Site Host, so there is nothing live to copy. It would need one only if it started storing data." },
 
   "retained": [
     {
