@@ -13,3 +13,10 @@ condition = "AND"
 paths = ['''^GBA Cartridge RePCB \(AGB\-E05\-01\)/Hardware/GBA Cartridge E05\-01 RePCB\.kicad_pcb$''']
 regexTarget = "secret"
 regexes = ['''^EAAAgAElEQVQXb6SGT88jd2vP1b9d$''']
+
+[[allowlists]]
+description = "2026-09-30: SHA-256 content hashes of the gbdk example key_num.c files in the change-gate baseline; the file name holds 'key', so the generic-api-key rule reads the hash as a key. Not a credential."
+condition = "AND"
+paths = ['''^\.guard/baseline\.json$''']
+regexTarget = "secret"
+regexes = ['''^6e3d942501cd92b437836fde6047e00bbc8955f19622b4dd4d0f0548a2f62bef$''', '''^bc7c0e2a3f021c9b96117ad97d1fd5ee54c4bc8a1ef6394cb88ba97fb5999907$''']
