@@ -57,8 +57,7 @@ Positive control: the same grep over copies of `server.js` and `index.html` with
 - Resolved (2026-09-30, Luke): freeze a change-gate baseline? Yes. `guard change freeze .` froze 536 files into `.guard/baseline.json`; `guard change gate .` passes (2 answered, 536 frozen). Refusing case: appending a line to the frozen `Game Development/GB/Resources/gbdk-mac/examples/ap/colorbar/bar_c.h` made the gate exit 1 naming that file; restored, it passes again.
 - Resolved (2026-09-30): where do the site's tests run on a target? Inside the deployed demo container, so the target needs no Node (task 2).
 
-### QUESTION: what is the viewer's site id on Site Host?
-Task 4 needs `sitehost demo <site> sitehost-proof`. The manifest's project id is `pce-pcb-viewer`, but the site is not on Site Host yet, so the id it gets there is not known. Luke does not know yet either (2026-09-30); settle it when the site is added on webby.
+- Resolved (2026-09-30): the viewer's site id on Site Host is `pce-pcb-viewer`. Site Host takes a site's id from its manifest's `project.id` when the site is added (`site-host-server/Source/src/SiteHost/Endpoints/SiteEndpoints.cs:608`), and the demo target refuses a manifest whose `project.id` differs from the site id it was asked for (`DemoCopyTarget.cs:294`). The four sites already on webby match: `mail-bridge`, `clean-pay`, `orderbooks`, `retrosix-auth`. So task 4's line is `sitehost demo pce-pcb-viewer sitehost-proof`.
 
 **Resume notes:**
 Tasks 1 to 3 are built and proved (2026-09-30). Only task 4 is left, and it waits on two things outside this repo:
@@ -66,7 +65,7 @@ Tasks 1 to 3 are built and proved (2026-09-30). Only task 4 is left, and it wait
 1. The viewer hosted on Site Host (webby). Today it is not, so there is no site for `sitehost demo` to name. Add it on webby from this repo, with the viewer's folder (`PC Engine GT/PCE PCB Viewer`) as the project root, since that is where the manifest lives.
 2. Site Host plan 01 (`site-host-server/Plans`, "Put a live copy of a site on a test machine with one command") finished, including pairing sitehost-proof as a named host.
 
-Then run `sitehost demo <site> sitehost-proof`. Expect: demo-configure, demo-deploy and demo-live-test as one job, then the profile's four health checks; the verdict is healthy only if `/health` on the demo port reports `testMode: true` and `demoCopy: demolive-pce-boardview`. Nothing is fetched from the live host (no group), so a failure there is a pairing or install problem, not data.
+Then run `sitehost demo pce-pcb-viewer sitehost-proof`. Expect: demo-configure, demo-deploy and demo-live-test as one job, then the profile's four health checks; the verdict is healthy only if `/health` on the demo port reports `testMode: true` and `demoCopy: demolive-pce-boardview`. Nothing is fetched from the live host (no group), so a failure there is a pairing or install problem, not data.
 
 ## Tasks
 - [x] 1. Make the viewer (`PC Engine GT/PCE PCB Viewer/server.js`) know it is a demo copy: a stamp baked into the demo image only, a test-mode switch set by the demo stack, startup refusing either without the other, and health reporting both. The survey found nothing outbound to stub. [risk: high]
@@ -89,6 +88,7 @@ Then run `sitehost demo <site> sitehost-proof`. Expect: demo-configure, demo-dep
 ## Pinned terms
 
 ## Agent activity log
+- 2026-09-30: Guard review receipts cleared by `guard plan set-section` because section `The plan` changed.
 - 2026-09-30: Guard review receipts cleared by `guard plan set-section` because section `The plan` changed.
 - 2026-09-30: Task 4 edited by `guard plan edit-task`.
 - 2026-09-30: Tasks marked done by `guard plan mark-done`.
