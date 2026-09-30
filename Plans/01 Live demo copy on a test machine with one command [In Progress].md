@@ -46,23 +46,19 @@ Positive control: the same grep over copies of `server.js` and `index.html` with
 - `/health` is new on production too (reports `testMode: false, demoCopy: null`). It exposes nothing sensitive and gives the profiles something to read.
 - Both dockerignore files now also exclude `**/.env`. The old `.env` line only matched the context root, so `Deployment/Website/.env` (ports only, never served) was baked into the production image. Proved: after the change, `ls -a Deployment/Website | grep -c '^.env$'` in the rebuilt production image prints 0.
 - Tests live in `Tests/` (guard name check refuses lowercase `test`); `node --test` finds `Tests/server.test.js` in both Node 18 (the image) and Node 26 (this Mac).
-- Production's compose healthcheck is NOT changed, although it is broken (see Open questions). Changing production's deploy was left to Luke.
+- Production's compose healthcheck was left for Luke, who then said fix it (see Open questions).
 
 **Found while building: production's healthcheck can never pass.** In `node:18-alpine`, `localhost` resolves to `::1` first and the server listens on IPv4 only, so `wget --spider http://localhost:8080/` is refused. Probe against a freshly built production image: `localhost exit=1` ("Connecting to localhost:8080 ([::1]:8080) ... Connection refused"), `127.0.0.1 exit=0`. The demo compose uses `127.0.0.1` and its container turns healthy; with `localhost` it timed out after 300s.
 
 **Open questions:**
 - Resolved (2026-09-30): is it worth doing when the viewer sends nothing? Yes. A copy proves the release builds, starts and passes its own tests on a clean machine, and the stamp and switch agreement keeps a demo image from ever being mistaken for production, or run as it. Built by tasks 1 and 2.
 - Resolved (2026-09-30): where does the stamp live with no database? In the demo image, written by the demo Dockerfile, and never in production's (task 1).
+- Resolved (2026-09-30, Luke): fix production's healthcheck? Yes. `Deployment/Website/docker-compose.yml` now probes `http://127.0.0.1:8080/health`. Before, in a running production container: `localhost` probe exit=1 (Connection refused on [::1]); after, the production stack turned `healthy` (health log: `Connecting to 127.0.0.1:8080 ... remote file exists`, ExitCode 0).
+- Resolved (2026-09-30, Luke): freeze a change-gate baseline? Yes. `guard change freeze .` froze 536 files into `.guard/baseline.json`; `guard change gate .` passes (2 answered, 536 frozen). Refusing case: appending a line to the frozen `Game Development/GB/Resources/gbdk-mac/examples/ap/colorbar/bar_c.h` made the gate exit 1 naming that file; restored, it passes again.
 - Resolved (2026-09-30): where do the site's tests run on a target? Inside the deployed demo container, so the target needs no Node (task 2).
 
-### QUESTION: fix production's healthcheck?
-`Deployment/Website/docker-compose.yml` probes `http://localhost:8080/`, which resolves to `::1` in the image while the server listens on IPv4 only, so the production container can never report healthy and the console's `deploy` step (`waitForHealthy`) would time out. The one-line fix is `127.0.0.1`, as the demo stack does. Left unchanged because it changes production's deploy. Evidence in Findings.
-
-### QUESTION: freeze a change-gate baseline for this repo?
-`guard change gate .` has no baseline here, so 500+ untouched files (GB examples, gbdk, scripts) show as outstanding. This plan's own source files are claimed (`server.js`, `demo-live-test.sh`); freezing the rest is a repo-wide decision left to Luke.
-
 ### QUESTION: what is the viewer's site id on Site Host?
-Task 4 needs `sitehost demo <site> sitehost-proof`. The manifest's project id is `pce-pcb-viewer`, but the site is not on Site Host yet, so the id it gets there is not known.
+Task 4 needs `sitehost demo <site> sitehost-proof`. The manifest's project id is `pce-pcb-viewer`, but the site is not on Site Host yet, so the id it gets there is not known. Luke does not know yet either (2026-09-30); settle it when the site is added on webby.
 
 **Resume notes:**
 Tasks 1 to 3 are built and proved (2026-09-30). Only task 4 is left, and it waits on two things outside this repo:
@@ -71,10 +67,6 @@ Tasks 1 to 3 are built and proved (2026-09-30). Only task 4 is left, and it wait
 2. Site Host plan 01 (`site-host-server/Plans`, "Put a live copy of a site on a test machine with one command") finished, including pairing sitehost-proof as a named host.
 
 Then run `sitehost demo <site> sitehost-proof`. Expect: demo-configure, demo-deploy and demo-live-test as one job, then the profile's four health checks; the verdict is healthy only if `/health` on the demo port reports `testMode: true` and `demoCopy: demolive-pce-boardview`. Nothing is fetched from the live host (no group), so a failure there is a pairing or install problem, not data.
-
-Before that run, answer the production healthcheck QUESTION: hosting the viewer on webby with the production profile will hit it, because production's container can never report healthy as it stands.
-
-Locally a stopped `demolive-pce-boardview` container and image are left on this Mac; `docker rm demolive-pce-boardview` and `docker rmi demolive-pce-boardview:latest` remove them.
 
 ## Tasks
 - [x] 1. Make the viewer (`PC Engine GT/PCE PCB Viewer/server.js`) know it is a demo copy: a stamp baked into the demo image only, a test-mode switch set by the demo stack, startup refusing either without the other, and health reporting both. The survey found nothing outbound to stub. [risk: high]
@@ -97,6 +89,7 @@ Locally a stopped `demolive-pce-boardview` container and image are left on this 
 ## Pinned terms
 
 ## Agent activity log
+- 2026-09-30: Guard review receipts cleared by `guard plan set-section` because section `The plan` changed.
 - 2026-09-30: Task 4 edited by `guard plan edit-task`.
 - 2026-09-30: Tasks marked done by `guard plan mark-done`.
 - 2026-09-30: Tasks marked done by `guard plan mark-done`.

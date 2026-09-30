@@ -29,7 +29,9 @@ services:
       # to loopback only and Caddy is the sole LAN listener.
       - "${WEB_BIND_ADDRESS:-127.0.0.1}:${WEB_PORT:-8001}:8080"
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/"]
+      # 127.0.0.1, not localhost: in this image localhost resolves to ::1 first, and the server listens
+      # on IPv4 only (HOST 0.0.0.0), so a localhost probe is refused and the container never turns healthy.
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:8080/health"]
       interval: 30s
       timeout: 10s
       retries: 3
