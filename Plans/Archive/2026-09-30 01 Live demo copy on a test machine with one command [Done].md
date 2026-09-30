@@ -1,5 +1,5 @@
 # Live demo copy on a test machine with one command
-Status: IN PROGRESS
+Status: DONE
 Priority: 3/5
 Plan type: code
 Plan style: solo
@@ -57,18 +57,13 @@ Positive control: the same grep over copies of `server.js` and `index.html` with
 - Resolved (2026-09-30, Luke): freeze a change-gate baseline? Yes. `guard change freeze .` froze 536 files into `.guard/baseline.json`; `guard change gate .` passes (2 answered, 536 frozen). Refusing case: appending a line to the frozen `Game Development/GB/Resources/gbdk-mac/examples/ap/colorbar/bar_c.h` made the gate exit 1 naming that file; restored, it passes again.
 - Resolved (2026-09-30): where do the site's tests run on a target? Inside the deployed demo container, so the target needs no Node (task 2).
 
-- Resolved (2026-09-30): the viewer's site id on Site Host is `pce-pcb-viewer`. Site Host takes a site's id from its manifest's `project.id` when the site is added (`site-host-server/Source/src/SiteHost/Endpoints/SiteEndpoints.cs:608`), and the demo target refuses a manifest whose `project.id` differs from the site id it was asked for (`DemoCopyTarget.cs:294`). The four sites already on webby match: `mail-bridge`, `clean-pay`, `orderbooks`, `retrosix-auth`. So task 4's line is `sitehost demo pce-pcb-viewer sitehost-proof`.
+- Resolved (2026-09-30): the viewer's site id on Site Host is `pce-pcb-viewer`. Site Host takes a site's id from its manifest's `project.id` when the site is added (`site-host-server/Source/src/SiteHost/Endpoints/SiteEndpoints.cs:608`), and the demo target refuses a manifest whose `project.id` differs from the site id it was asked for (`DemoCopyTarget.cs:294`). The four sites already on webby match: `mail-bridge`, `clean-pay`, `orderbooks`, `retrosix-auth`. So the eventual run is `sitehost demo pce-pcb-viewer sitehost-proof`.
 
 **Resume notes:**
-Tasks 1 to 3 are built and proved (2026-09-30). Only task 4 is left, and it waits on two things outside this repo:
-
-1. The viewer hosted on Site Host (webby). Today it is not, so there is no site for `sitehost demo` to name. Add it on webby from this repo, with the viewer's folder (`PC Engine GT/PCE PCB Viewer`) as the project root, since that is where the manifest lives.
-2. Site Host plan 01 (`site-host-server/Plans`, "Put a live copy of a site on a test machine with one command") finished, including pairing sitehost-proof as a named host.
-
-Then run `sitehost demo pce-pcb-viewer sitehost-proof`. Expect: demo-configure, demo-deploy and demo-live-test as one job, then the profile's four health checks; the verdict is healthy only if `/health` on the demo port reports `testMode: true` and `demoCopy: demolive-pce-boardview`. Nothing is fetched from the live host (no group), so a failure there is a pairing or install problem, not data.
+Done (2026-09-30). The real `sitehost demo pce-pcb-viewer sitehost-proof` run was dropped from this plan by Luke: it will happen naturally once the viewer is deployed on Site Host (webby, manifest `PC Engine GT/PCE PCB Viewer/Deployment/deploy.manifest.json`) and Site Host plan 01 has paired sitehost-proof.
 
 ## Tasks
-- [x] 1. Make the viewer (`PC Engine GT/PCE PCB Viewer/server.js`) know it is a demo copy: a stamp baked into the demo image only, a test-mode switch set by the demo stack, startup refusing either without the other, and health reporting both. The survey found nothing outbound to stub. [risk: high]
+- [x] 1. Make the viewer's server.js (in the PC Engine GT / PCE PCB Viewer folder) know it is a demo copy: a stamp baked into the demo image only, a test-mode switch set by the demo stack, startup refusing either without the other, and health reporting both. The survey found nothing outbound to stub. [risk: high]
     - Done when: named node:test tests in a new viewer test suite go red before the change and green after: a stamp without test mode and test mode without a stamp each make startup exit non-zero naming the mismatch, and /health reports testMode and the stamp
     - Evidence (2026-09-30): 2026-09-30. RED before server.js changed: node --test on Tests/server.test.js: tests 9, pass 1, fail 7 (readDemoState/createApp not a function; requiring server.js started a listener and hung 30s). GREEN after: npm test: tests 9, pass 9, fail 0 (A demo stamp without test mode is a mismatch; Test mode without a demo stamp is a mismatch; A blank stamp does not count as a stamp; Production and a stamped demo in test mode both agree; Startup refuses test mode on an unstamped viewer; Startup refuses a demo stamp without test mode; Startup serves production and a stamped demo in test mode; Health reports test mode and the demo stamp; Health on production reports no test mode and no stamp). Mutations: refusal disabled (if (false && mismatch)) -> fail 2, both startup refusals; stamp-without-test-mode branch removed -> fail 1; /health testMode hard-coded true -> fail 1; restored -> pass 9. Real images: demo image with PCE_VIEWER_TEST_MODE=false -> 'Refusing to start: This viewer is stamped as a demo copy (demo-copy.stamp: demolive-pce-boardview) but test mode is off...' exit=1; production image with PCE_VIEWER_TEST_MODE=true -> 'Refusing to start: PCE_VIEWER_TEST_MODE is on (test mode is on) but this viewer is not stamped as a demo copy (no demo-copy.stamp)...' exit=1. Outbound: survey grep exit=1 with positive control exit=0 (plan Findings), so nothing to stub.
 - [x] 2. Add the standalone demo stack and the demo-live profile (low danger, own container and port) with configure, deploy and test steps, and a demoCopy naming those steps with no group. [risk: low]
@@ -77,8 +72,6 @@ Then run `sitehost demo pce-pcb-viewer sitehost-proof`. Expect: demo-configure, 
 - [x] 3. Remove the demoLive reason from the viewer manifest, which a demo-live profile makes an error, document the demo copy beside the other deployment docs, and name the new test command in `AgentDocumentation/Project.md`. [risk: low]
     - Done when: deploy lint on the viewer's manifest exits 0 with no demoLive or demoCopy line, and fails when the old demoLive reason is put back beside the profile
     - Evidence (2026-09-30): 2026-09-30. With the demo-live profile added and the old reason still present: deploy lint -> 'error: demoLive: says why there is no demo-live profile, but the manifest declares one. Keep one answer.' 'FAIL deploy.manifest.json — 1 error(s).' exit=1. Reason removed: deploy lint -> 'PASS deploy.manifest.json — 6 step(s), 2 profile(s).' exit=0, no demoLive or demoCopy line. Docs: new Deployment/Demo/README.md, pointer in Deployment/Website/README.md and in the manifest's project links, npm test and the demo-live profile named in AgentDocumentation/Project.md. guard docs symbols . PASS; guard docs plan-refs . PASS; removed-identifier sweep: 6 candidates, 0 gone.
-- [ ] 4. Waiting on the viewer being hosted on Site Host (webby) and Site Host plan 01 finishing: then `sitehost demo` it to the sitehost-proof VM and read the verdict. [risk: high]
-    - Done when: 🚧 needs the site on webby and Site Host plan 01 finished: `sitehost demo <site> sitehost-proof` exits 0 with a healthy verdict
 
 ## Feedback notes
 {{Optional: consolidate live testing feedback here before folding it back into tasks/decisions.}}
@@ -88,6 +81,11 @@ Then run `sitehost demo pce-pcb-viewer sitehost-proof`. Expect: demo-configure, 
 ## Pinned terms
 
 ## Agent activity log
+- 2026-09-30: Archived to `Plans/Archive/` as `2026-09-30 01 Live demo copy on a test machine with one command [Done].md`.
+- 2026-09-30: Status changed from `IN PROGRESS` to `DONE` by `guard plan set-status`.
+- 2026-09-30: Task 1 edited by `guard plan edit-task`.
+- 2026-09-30: Guard review receipts cleared by `guard plan set-section` because section `The plan` changed.
+- 2026-09-30: Task 4 removed by `guard plan remove-task`.
 - 2026-09-30: Guard review receipts cleared by `guard plan set-section` because section `The plan` changed.
 - 2026-09-30: Guard review receipts cleared by `guard plan set-section` because section `The plan` changed.
 - 2026-09-30: Task 4 edited by `guard plan edit-task`.
@@ -112,4 +110,4 @@ Then run `sitehost demo pce-pcb-viewer sitehost-proof`. Expect: demo-configure, 
 - 2026-09-30: Guard review receipts cleared by `guard plan set-section` because section `The idea` changed.
 
 ## Model authorship
-- 2026-09-30: claude-opus-5-5 — created plan, set section "The idea", added 4 tasks, set section "Findings", set section "Rough approach", set section "Open questions", edited task 1, edited task 2, edited task 3, set status to IN PROGRESS, set section "The plan", marked tasks done, edited task 4
+- 2026-09-30: claude-opus-5-5 — created plan, set section "The idea", added 4 tasks, set section "Findings", set section "Rough approach", set section "Open questions", edited task 1, edited task 2, edited task 3, set status to IN PROGRESS, set section "The plan", marked tasks done, edited task 4, removed task 4, set status to DONE
