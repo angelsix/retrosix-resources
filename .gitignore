@@ -478,3 +478,7 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .mypy_cache/
+
+
+# guard change ledger — working notes about code being written now, never history
+.guard/changes/
