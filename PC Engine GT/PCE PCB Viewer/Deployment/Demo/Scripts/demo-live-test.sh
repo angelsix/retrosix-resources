@@ -10,9 +10,9 @@ set -euo pipefail
 
 repo="$(cd "$(dirname "$0")/../../.." && pwd)"
 env_file="$repo/Deployment/Demo/.env"
-[[ -f "$env_file" ]] || { echo "FAIL: $env_file missing — run demo-configure first."; exit 1; }
 
-read_env() { grep -E "^$1=" "$2" 2>/dev/null | tail -1 | cut -d= -f2- | sed -e 's/^"//' -e 's/"$//'; }
+# A missing file or key reads as blank, and the blank falls back to the compose default.
+read_env() { { grep -E "^$1=" "$2" 2>/dev/null || true; } | tail -1 | cut -d= -f2- | sed -e 's/^"//' -e 's/"$//'; }
 port="$(read_env DEMO_PORT "$env_file")"; port="${port:-8101}"
 live_port="$(read_env WEB_PORT "$repo/Deployment/Website/.env")"; live_port="${live_port:-8001}"
 
