@@ -4,7 +4,7 @@
 # The stamp is half of the viewer's demo guard. server.js refuses to start stamped without test mode
 # (PCE_VIEWER_TEST_MODE, hard-wired on by docker-compose.demo.yml) and refuses test mode without a
 # stamp, so this image cannot be run as production and production's image cannot be run as a demo.
-FROM node:18-alpine
+FROM node:22-alpine
 
 WORKDIR /app
 
@@ -22,5 +22,9 @@ EXPOSE 8080
 
 ENV PORT=8080
 ENV HOST=0.0.0.0
+
+# The base image's unprivileged user (2026-10-24 security sweep). The app writes nothing under
+# /app at runtime, so the root-owned files copied above stay readable and nothing needs chowning.
+USER node
 
 CMD ["node", "server.js"]
